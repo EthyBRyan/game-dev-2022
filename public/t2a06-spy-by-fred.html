@@ -1,6 +1,6 @@
 <script>
 
-   function myEncryption(){
+   function myEncryptionBasic(){
       let myTemp = ''
    myString = document.getElementById('myArea01').value.split('')
    for (let myLoop=0;   myLoop < myString.length; myLoop++){
@@ -84,7 +84,7 @@
 
 <script>
 
-   function myDecryption(){
+   function myDecryptionBasic(){
       let myTemp = ''
    myString = document.getElementById('myArea02').value.split('')
    for (let myLoop=0;   myLoop < myString.length; myLoop++){
@@ -170,16 +170,16 @@
 <textarea id="myArea01" rows=4 cols=70>This text is top secret!</textarea><br> 
 
 
-<input type=button value="encrypt" onclick="{
-   myEncryption()
+<input type=button value="Encrypt" onclick="{
+   myEncryptionBasic()
 }"><br><br>
 
 
 
 <textarea id="myArea02" rows=4 cols=70></textarea><br> 
 
-<input type=button value="decrypt" onclick="{
-   myDecryption()
+<input type=button value="Decrypt" onclick="{
+   myDecryptionBasic()
 }"><br><br>
 
 
