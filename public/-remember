@@ -1,3 +1,16 @@
 MD5
 sha256
-MDN
+
+<input type=button value="Encrypt MD5" onclick="{
+   myEncryptionMD5()
+}">
+<input type=button value="Encrypt sha256" onclick="{
+   myEncryptionSha256()
+}">
+
+<input type=button value="Decrypt MD5" onclick="{
+   myDecryptionMD5()
+}">
+<input type=button value="Decrypt sha256" onclick="{
+   myDecryptionSha256()
+}">
