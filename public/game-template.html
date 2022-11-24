@@ -28,6 +28,22 @@ Version 0.0.1<br>
     document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 7
       myCheckHit()
    }
+   if (myKey == 'ArrowUp') {
+    document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 7
+      myCheckHit()
+   }
+   if (myKey == 'ArrowLeft') {
+    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 7
+      myCheckHit()
+   }
+   if (myKey == 'ArrowRight') {
+    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
+      myCheckHit()
+   }
+   if (myKey == 'ArrowDown') {
+    document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 7
+      myCheckHit()
+   }
    // put your other keydowns here.
 }">
 
@@ -81,7 +97,7 @@ function gravityDown(){
   myClock2 = setInterval(function(){
       myGravity -= 7
       gravity =  myGravity + 'px 0px'
-      document.getElementById('myImg01').style.left =parseInt(document.getElementById('myImg01').style.left) = gravity
+      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) = gravity
   }, 100)
 }
 
