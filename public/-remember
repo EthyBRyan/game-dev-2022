@@ -14,3 +14,5 @@ sha256
 <input type=button value="Decrypt sha256" onclick="{
    myDecryptionSha256()
 }">
+
+https://stackoverflow.com/questions/64394361/why-does-holding-a-key-down-write-a-single-letter-stutter-for-a-second-and-then
