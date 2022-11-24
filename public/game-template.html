@@ -38,7 +38,9 @@ Version 0.0.1<br>
 
    // global variables here
    let myGlobalX = 0
+   let myGravity = 0
    let myClock
+   let myClock2
    let myInterval=0;
 
    // global functions here
@@ -73,8 +75,19 @@ function myCheckHit(){
 
 }  // end of myCheckHit()
 
+function gravityDown(){
+   clearInterval(myClock2)
+  let gravity = '100px 0px'
+  myClock2 = setInterval(function(){
+      myGravity -= 7
+      gravity =  myGravity + 'px 0px'
+      document.getElementById('myImg01').style.left =parseInt(document.getElementById('myImg01').style.left) = gravity
+  }, 100)
+}
+
 
 </script>
+
 
 <img id="myImg01" style="position:absolute; width:100px; height:80px; top:0px; left:0px;"  src="myImage01.jpg">
 <img id="myImg02" style="position:absolute; width:100px; height:3px; top:100px; left:0px;" src="myImage01.jpg">
@@ -95,13 +108,10 @@ function myCheckHit(){
   document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
   myCheckHit()     // checks for all collisions
 }">
-<input type=button value="Move Image Left" onclick="{
-   clearInterval(myClock)
-      myClock = setInterval(function(){
-         document.getElementById('myButton02').click() 
-      }, 100)
-   document.getElementById('myImage01').style.left = parseInt(document.getElementById('myImage01').style.left) - 10 + 'px'
- }"><br><br>
+
+<input type=button value="Gravity" onclick="{
+   gravityDown()
+   }"><br><br>
 
 
 <div id="myDiv01" style="color:yellow">..</div>
