@@ -93,11 +93,9 @@ function myCheckHit(){
 
 function gravityDown(){
    clearInterval(myClock2)
-  let gravity = '100px 0px'
-  myClock2 = setInterval(function(){
-      myGravity += 7
-      gravity =  myGravity + 'px 0px'
-      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) = gravity
+   myClock2 = setInterval(function(){
+      myGravity += 1
+      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
   }, 100)
 }
 
