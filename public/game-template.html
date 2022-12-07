@@ -29,6 +29,7 @@ Version 0.0.1<br>
       myCheckHit()
    }
    if (myKey == 'ArrowUp') {
+      myGravity = 0
     document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 7
       myCheckHit()
    }
@@ -42,7 +43,9 @@ Version 0.0.1<br>
    }
    if (myKey == 'ArrowDown') {
     document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 7
-      myCheckHit()
+      myCheckHitFloor()
+      myCheckHitRoof()
+      //copy paste to everything above
    }
    // put your other keydowns here.
 }">
@@ -77,24 +80,28 @@ function myHitOther(my1,my2){
    }
 }
 
-function myCheckHit(){
+function myCheckHitFloor(){
    if ( myHitOther('myImg01','myImg02') ){
        //alert('you lose')  
-       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 7 + 'px'
+       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
        //location = 't2a13-keydown.html'  // go to your next level
+       myGravity = 0
    }
-
-
-   // more if statements here like the above
-
-
-
-}  // end of myCheckHit()
+}
+   function myCheckHitRoof(){
+   if ( myHitOther('myImg01','myImg03') ){
+       //alert('you lose')  
+       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
+       //location = 't2a13-keydown.html'  // go to your next level
+       myGravity = 0
+   }
+   }
 
 function gravityDown(){
    clearInterval(myClock2)
-   myClock2 = setInterval(function(){
-      myGravity += 1
+   myClock2 = setInterval(function(){    
+      myCheckHitFloor();
+      myCheckHitRoof();
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
   }, 100)
 }
@@ -103,8 +110,9 @@ function gravityDown(){
 </script>
 
 
-<img id="myImg01" style="position:absolute; width:100px; height:80px; top:0px; left:0px;"  src="myImage01.jpg">
-<img id="myImg02" style="position:absolute; width:100px; height:3px; top:100px; left:0px;" src="myImage01.jpg">
+<img id="myImg01" style="position:absolute; width:100px; height:80px; top:250px; left:500px;"  src="myImage01.jpg">
+<img id="myImg02" style="position:absolute; width:1000px; height:30px; top:100px; left:0px;" src="myImage01.jpg">
+<img id="myImg03" style="position:absolute; width:1000px; height:30px; top:500px; left:0px;" src="myImage01.jpg">
 
 <input type=button value="Auto Background Left" onclick="{
   clearInterval(myClock)
@@ -120,10 +128,12 @@ function gravityDown(){
 
 <input type=button value="Image Right Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
   document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
-  myCheckHit()     // checks for all collisions
+  myCheckHitFloor()
+  myCheckHitRoof()
 }">
 
 <input type=button value="Gravity" onclick="{
+   myGravity = 10
    gravityDown()
    }"><br><br>
 
