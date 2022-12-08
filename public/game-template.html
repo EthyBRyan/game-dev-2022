@@ -4,50 +4,74 @@ Version 0.0.1<br>
 <body id="myBody" style="background-repeat:repeat; background-size: 80%" background="myBackground01.jpg"     onkeydown="{
    let myKey = event.key
    //  let myKey = String.toLowerCase(event.key)
-   document.getElementById('myDiv01').innerHTML = myKey
    if (myKey == 'd') {
-     // either uncomment
-     // clearInterval(myInterval)
-     // myInterval = setInterval(function(){
-     //    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 3
-     //    myCheckHit()
-     // } ,20)
-     // or do the following
-      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
-      myCheckHit()
+      if (gravityDirection == 'down' || gravityDirection == 'up') {
+    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
+    myCheckHitFloor()
+      myCheckHitRoof()
+   }
    }
    if (myKey == 'a') {
-    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 7
-      myCheckHit()
+      if (gravityDirection == 'down' || gravityDirection == 'up') {
+    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
+    myCheckHitFloor()
+      myCheckHitRoof()
+   }
    }
    if (myKey == 'w') {
-    document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 7
-      myCheckHit()
+      if ((myGravity == 0 ) &&
+         (gravityDirection == 'up')) {
+         gravityDirection = 'down'
+         myGravity = -10
+         gravity()
+      }
+    myCheckHitFloor()
+      myCheckHitRoof()
    }
    if (myKey == 's') {
-    document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 7
-      myCheckHit()
+    if ((myGravity == 0) &&
+       (gravityDirection == 'down')) {
+      gravityDirection = 'up'
+      myGravity = 10
+      gravity()
+    }
+    myCheckHitFloor()
+      myCheckHitRoof()
    }
    if (myKey == 'ArrowUp') {
-      myGravity = 0
-    document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 7
-      myCheckHit()
+      if ((myGravity == 0 ) &&
+         (gravityDirection == 'up')) {
+         gravityDirection = 'down'
+         myGravity = -10
+         gravity()
+      }
+    myCheckHitFloor()
+      myCheckHitRoof()
    }
    if (myKey == 'ArrowLeft') {
-    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 7
-      myCheckHit()
+      if (gravityDirection == 'down' || gravityDirection == 'up') {
+    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
+    myCheckHitFloor()
+      myCheckHitRoof()
+   }
    }
    if (myKey == 'ArrowRight') {
+      if (gravityDirection == 'down' || gravityDirection == 'up') {
     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
-      myCheckHit()
+    myCheckHitFloor()
+      myCheckHitRoof()
+   }
    }
    if (myKey == 'ArrowDown') {
-    document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 7
+      if ((myGravity == 0) &&
+      (gravityDirection == 'down')) {
+      gravityDirection = 'up'
+      myGravity = 10
+      gravity()
+    }
       myCheckHitFloor()
       myCheckHitRoof()
-      //copy paste to everything above
    }
-   // put your other keydowns here.
 }">
 
 <h1 align=center style="color:white">t4a01-game-template-with-wasd-by-fred</h1>
@@ -60,7 +84,9 @@ Version 0.0.1<br>
    let myGravity = 0
    let myClock
    let myClock2 = 0
-   let myInterval=0;
+   let myInterval = 0;
+   let backgroundAuto = 'off'
+   let gravityDirection = 'none'
 
    // global functions here
 function myHitOther(my1,my2){
@@ -81,30 +107,31 @@ function myHitOther(my1,my2){
 }
 
 function myCheckHitFloor(){
-   if ( myHitOther('myImg01','myImg02') ){
+   if ( myHitOther('myImg01','myImg03') ){
        //alert('you lose')  
-       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
+       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1 + 'px'
        //location = 't2a13-keydown.html'  // go to your next level
        myGravity = 0
    }
 }
    function myCheckHitRoof(){
-   if ( myHitOther('myImg01','myImg03') ){
+   if ( myHitOther('myImg01','myImg02') ){
        //alert('you lose')  
-       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 10 + 'px'
+       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1 + 'px'
        //location = 't2a13-keydown.html'  // go to your next level
        myGravity = 0
    }
    }
 
-function gravityDown(){
+function gravity(){
    clearInterval(myClock2)
    myClock2 = setInterval(function(){    
       myCheckHitFloor();
       myCheckHitRoof();
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
-  }, 100)
+  }, 80)
 }
+
 
 
 </script>
@@ -114,7 +141,9 @@ function gravityDown(){
 <img id="myImg02" style="position:absolute; width:1000px; height:30px; top:100px; left:0px;" src="myImage01.jpg">
 <img id="myImg03" style="position:absolute; width:1000px; height:30px; top:500px; left:0px;" src="myImage01.jpg">
 
-<input type=button value="Auto Background Left" onclick="{
+<input type=button value="Start/Stop Auto Background" onclick="{
+   if (backgroundAuto == 'off') {
+      backgroundAuto = 'on'
   clearInterval(myClock)
   let myTemp = '100px 0px'
   myClock = setInterval(function(){
@@ -122,20 +151,18 @@ function gravityDown(){
       myTemp =  myGlobalX + 'px 0px'
       document.getElementById('myBody').style.backgroundPosition = myTemp
   }, 100)
-    
+ } else {
+      (backgroundAuto == 'on') 
+      backgroundAuto = 'off'
+      clearInterval(myClock)
+   }
 }">
 
-
-<input type=button value="Image Right Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
-  document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
-  myCheckHitFloor()
-  myCheckHitRoof()
-}">
-
-<input type=button value="Gravity" onclick="{
+<input type=button value="Gravity"onclick="{
+   gravityDirection = 'up'
    myGravity = 10
-   gravityDown()
+   gravity()
+   this.style.display='none'
    }"><br><br>
 
 
-<div id="myDiv01" style="color:yellow">..</div>
