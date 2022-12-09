@@ -1,5 +1,3 @@
-Version 0.0.1<br>
-
 
 <body id="myBody" style="background-repeat:repeat; background-size: 80%" background="myBackground01.jpg"     onkeydown="{
    let myKey = event.key
@@ -22,7 +20,8 @@ Version 0.0.1<br>
       if ((myGravity == 0 ) &&
          (gravityDirection == 'up')) {
          gravityDirection = 'down'
-         myGravity = -10
+         document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1
+         myGravity = -1
          gravity()
       }
     myCheckHitFloor()
@@ -32,7 +31,8 @@ Version 0.0.1<br>
     if ((myGravity == 0) &&
        (gravityDirection == 'down')) {
       gravityDirection = 'up'
-      myGravity = 10
+      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1
+      myGravity = 1
       gravity()
     }
     myCheckHitFloor()
@@ -42,7 +42,8 @@ Version 0.0.1<br>
       if ((myGravity == 0 ) &&
          (gravityDirection == 'up')) {
          gravityDirection = 'down'
-         myGravity = -10
+         document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1
+         myGravity = -1
          gravity()
       }
     myCheckHitFloor()
@@ -66,7 +67,8 @@ Version 0.0.1<br>
       if ((myGravity == 0) &&
       (gravityDirection == 'down')) {
       gravityDirection = 'up'
-      myGravity = 10
+      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1
+      myGravity = 1
       gravity()
     }
       myCheckHitFloor()
@@ -74,8 +76,7 @@ Version 0.0.1<br>
    }
 }">
 
-<h1 align=center style="color:white">t4a01-game-template-with-wasd-by-fred</h1>
-<br><br><br><br>
+
 
 <script>
 
@@ -108,17 +109,15 @@ function myHitOther(my1,my2){
 
 function myCheckHitFloor(){
    if ( myHitOther('myImg01','myImg03') ){
-       //alert('you lose')  
-       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1 + 'px'
-       //location = 't2a13-keydown.html'  // go to your next level
+       //document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1 + 'px'
        myGravity = 0
-   }
+  } //else {
+   //if (gravityDirection = )
+  //}
 }
    function myCheckHitRoof(){
    if ( myHitOther('myImg01','myImg02') ){
-       //alert('you lose')  
-       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1 + 'px'
-       //location = 't2a13-keydown.html'  // go to your next level
+       //document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1 + 'px'
        myGravity = 0
    }
    }
@@ -129,7 +128,7 @@ function gravity(){
       myCheckHitFloor();
       myCheckHitRoof();
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
-  }, 80)
+  }, 2)
 }
 
 
@@ -147,10 +146,10 @@ function gravity(){
   clearInterval(myClock)
   let myTemp = '100px 0px'
   myClock = setInterval(function(){
-      myGlobalX -= 5
+      myGlobalX -= 1
       myTemp =  myGlobalX + 'px 0px'
       document.getElementById('myBody').style.backgroundPosition = myTemp
-  }, 100)
+  }, 10)
  } else {
       (backgroundAuto == 'on') 
       backgroundAuto = 'off'
@@ -160,7 +159,7 @@ function gravity(){
 
 <input type=button value="Gravity"onclick="{
    gravityDirection = 'up'
-   myGravity = 10
+   myGravity = 1
    gravity()
    this.style.display='none'
    }"><br><br>
