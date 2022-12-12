@@ -7,6 +7,8 @@
     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
     myCheckHitFloor()
       myCheckHitRoof()
+      checkGravityDown()
+      checkGravityUp()
    }
    }
    if (myKey == 'a') {
@@ -14,12 +16,14 @@
     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 7
     myCheckHitFloor()
       myCheckHitRoof()
+      checkGravityDown()
+      checkGravityUp()
    }
    }
    if (myKey == 'w') {
       if ((myGravity == 0 ) &&
-         (gravityDirection == 'up')) {
-         gravityDirection = 'down'
+         (gravityDirection == 'down')) {
+         gravityDirection = 'up'
          document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1
          myGravity = -1
          gravity()
@@ -29,8 +33,8 @@
    }
    if (myKey == 's') {
     if ((myGravity == 0) &&
-       (gravityDirection == 'down')) {
-      gravityDirection = 'up'
+       (gravityDirection == 'up')) {
+      gravityDirection = 'down'
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1
       myGravity = 1
       gravity()
@@ -40,8 +44,8 @@
    }
    if (myKey == 'ArrowUp') {
       if ((myGravity == 0 ) &&
-         (gravityDirection == 'up')) {
-         gravityDirection = 'down'
+         (gravityDirection == 'down')) {
+         gravityDirection = 'up'
          document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1
          myGravity = -1
          gravity()
@@ -54,6 +58,8 @@
     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 7
     myCheckHitFloor()
       myCheckHitRoof()
+      checkGravityDown()
+      checkGravityUp()
    }
    }
    if (myKey == 'ArrowRight') {
@@ -61,15 +67,17 @@
     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
     myCheckHitFloor()
       myCheckHitRoof()
+      checkGravityDown()
+      checkGravityUp()
    }
    }
    if (myKey == 'ArrowDown') {
       if ((myGravity == 0) &&
-      (gravityDirection == 'down')) {
-      gravityDirection = 'up'
+      (gravityDirection == 'up')) {
+      gravityDirection = 'down'
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1
-      myGravity = 1
-      gravity()
+      myGravity += 2
+      startupGravity()
     }
       myCheckHitFloor()
       myCheckHitRoof()
@@ -111,10 +119,9 @@ function myCheckHitFloor(){
    if ( myHitOther('myImg01','myImg03') ){
        //document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1 + 'px'
        myGravity = 0
-  } //else {
-   //if (gravityDirection = )
-  //}
+  } 
 }
+
    function myCheckHitRoof(){
    if ( myHitOther('myImg01','myImg02') ){
        //document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1 + 'px'
@@ -122,23 +129,44 @@ function myCheckHitFloor(){
    }
    }
 
+   function startupGravity(){
+   clearInterval(myClock2)
+   myClock2 = setInterval(function(){
+      myCheckHitFloor();
+      myCheckHitRoof();
+      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
+  }, 100)
+   }
+
 function gravity(){
    clearInterval(myClock2)
-   myClock2 = setInterval(function(){    
+   myClock2 = setInterval(function(){
       myCheckHitFloor();
       myCheckHitRoof();
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
   }, 2)
 }
 
+function checkGravityDown(){
+   if ((myHitOther('myImg01','myImg03') != true) &&
+      (gravityDirection == 'down')){
+         myGravity = 1
+   }
+}
 
+function checkGravityUp(){
+   if ((myHitOther('myImg01','myImg02') != true) &&
+      (gravityDirection == 'up')){
+         myGravity = -1
+   }
+}
 
 </script>
 
 
-<img id="myImg01" style="position:absolute; width:100px; height:80px; top:250px; left:500px;"  src="myImage01.jpg">
-<img id="myImg02" style="position:absolute; width:1000px; height:30px; top:100px; left:0px;" src="myImage01.jpg">
-<img id="myImg03" style="position:absolute; width:1000px; height:30px; top:500px; left:0px;" src="myImage01.jpg">
+<img id="myImg01" style="position:absolute; width:100px; height:80px; top:250px; left:475px;"  src="myImage01.jpg">
+<img id="myImg02" style="position:absolute; width:750px; height:30px; top:100px; left:100px;" src="myImage01.jpg">
+<img id="myImg03" style="position:absolute; width:750px; height:30px; top:500px; left:100px;" src="myImage01.jpg">
 
 <input type=button value="Start/Stop Auto Background" onclick="{
    if (backgroundAuto == 'off') {
@@ -155,13 +183,13 @@ function gravity(){
       backgroundAuto = 'off'
       clearInterval(myClock)
    }
-}">
+}"><br><br><br><br><br><br><br><br><br>
 
-<input type=button value="Gravity"onclick="{
-   gravityDirection = 'up'
+<h1 align=center><input type=button value="Start"onclick="{
+   gravityDirection = 'down'
    myGravity = 1
    gravity()
    this.style.display='none'
-   }"><br><br>
+   }"></h1>
 
 
