@@ -76,7 +76,7 @@
       (gravityDirection == 'up')) {
       gravityDirection = 'down'
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1
-      myGravity += 2
+      myGravity += 1
       startupGravity()
     }
       myCheckHitFloor()
@@ -135,7 +135,7 @@ function myCheckHitFloor(){
       myCheckHitFloor();
       myCheckHitRoof();
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
-  }, 100)
+  }, 10)
    }
 
 function gravity(){

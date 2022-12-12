@@ -18,6 +18,3 @@ sha256
 https://stackoverflow.com/questions/64394361/why-does-holding-a-key-down-write-a-single-letter-stutter-for-a-second-and-then
 
      myCards[myLoop] = 0 // you do this stuff
-
-     make down make gravity go down if myGravity is 0
-     ^same with gravity up
