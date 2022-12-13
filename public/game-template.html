@@ -1,8 +1,9 @@
 
 <body id="myBody" style="background-repeat:repeat; background-size: 80%" background="myBackground01.jpg"     onkeydown="{
    let myKey = event.key
-   //  let myKey = String.toLowerCase(event.key)
-   if (myKey == 'd') {
+   //let myKey = String.toLowerCase(event.key)
+
+   if (myKey == 'd' || myKey == 'D' || myKey == 'ArrowRight') {
       if (gravityDirection == 'down' || gravityDirection == 'up') {
     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
     myCheckHitFloor()
@@ -11,7 +12,7 @@
       checkGravityUp()
    }
    }
-   if (myKey == 'a') {
+   if (myKey == 'a' || myKey == 'A' || myKey == 'ArrowLeft') {
       if (gravityDirection == 'down' || gravityDirection == 'up') {
     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 7
     myCheckHitFloor()
@@ -20,7 +21,7 @@
       checkGravityUp()
    }
    }
-   if (myKey == 'w') {
+   if (myKey == 'w' || myKey == 'W' || myKey == 'ArrowUp') {
       if ((myGravity == 0 ) &&
          (gravityDirection == 'down')) {
          gravityDirection = 'up'
@@ -30,7 +31,7 @@
     myCheckHitFloor()
       myCheckHitRoof()
    }
-   if (myKey == 's') {
+   if (myKey == 's' || myKey == 'S' || myKey == 'ArrowDown') {
     if ((myGravity == 0) &&
        (gravityDirection == 'up')) {
       gravityDirection = 'down'
@@ -38,46 +39,6 @@
       startupGravityDown()
     }
     myCheckHitFloor()
-      myCheckHitRoof()
-   }
-   if (myKey == 'ArrowUp') {
-      if ((myGravity == 0 ) &&
-         (gravityDirection == 'down')) {
-         gravityDirection = 'up'
-         document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1
-         //startupGravityUp()
-         myGravity = -1
-         gravity()
-      }
-    myCheckHitFloor()
-      myCheckHitRoof()
-   }
-   if (myKey == 'ArrowLeft') {
-      if (gravityDirection == 'down' || gravityDirection == 'up') {
-    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 7
-    myCheckHitFloor()
-      myCheckHitRoof()
-      checkGravityDown()
-      checkGravityUp()
-   }
-   }
-   if (myKey == 'ArrowRight') {
-      if (gravityDirection == 'down' || gravityDirection == 'up') {
-    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
-    myCheckHitFloor()
-      myCheckHitRoof()
-      checkGravityDown()
-      checkGravityUp()
-   }
-   }
-   if (myKey == 'ArrowDown') {
-      if ((myGravity == 0) &&
-      (gravityDirection == 'up')) {
-      gravityDirection = 'down'
-      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1
-      startupGravityDown()
-    }
-      myCheckHitFloor()
       myCheckHitRoof()
    }
 }">
@@ -132,12 +93,14 @@ function myCheckHitFloor(){
    myClock2 = setInterval(function(){
       myCheckHitFloor();
       myCheckHitRoof();
-      myGravity += 0.2
-      if (myGravity == 1){
-      myGravity = 1
-   }
+      myGravity += 0.07
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
-  }, 10)
+      if (myGravity >= 1){
+         clearInterval(myClock2)
+         myGravity = 1
+         gravity()
+      }
+   }, 2)
    }
 
    function startupGravityUp(){
@@ -145,9 +108,14 @@ function myCheckHitFloor(){
    myClock2 = setInterval(function(){
       myCheckHitFloor();
       myCheckHitRoof();
-      myGravity -= 0.2
+      myGravity -= 0.07
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
-  }, 10)
+      if (myGravity <= -1){
+         clearInterval(myClock2)
+         myGravity = -1
+         gravity()
+      }
+   }, 2)
    }
 
 function gravity(){
@@ -162,14 +130,14 @@ function gravity(){
 function checkGravityDown(){
    if ((myHitOther('myImg01','myImg03') != true) &&
       (gravityDirection == 'down')){
-         myGravity = 1
+         startupGravityDown()
    }
 }
 
 function checkGravityUp(){
    if ((myHitOther('myImg01','myImg02') != true) &&
       (gravityDirection == 'up')){
-         myGravity = -1
+         startupGravityUp()
    }
 }
 
