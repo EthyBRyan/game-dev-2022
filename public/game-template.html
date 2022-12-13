@@ -25,8 +25,7 @@
          (gravityDirection == 'down')) {
          gravityDirection = 'up'
          document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1
-         myGravity = -1
-         gravity()
+         startupGravityUp()
       }
     myCheckHitFloor()
       myCheckHitRoof()
@@ -36,8 +35,7 @@
        (gravityDirection == 'up')) {
       gravityDirection = 'down'
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1
-      myGravity = 1
-      gravity()
+      startupGravityDown()
     }
     myCheckHitFloor()
       myCheckHitRoof()
@@ -47,6 +45,7 @@
          (gravityDirection == 'down')) {
          gravityDirection = 'up'
          document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1
+         //startupGravityUp()
          myGravity = -1
          gravity()
       }
@@ -76,8 +75,7 @@
       (gravityDirection == 'up')) {
       gravityDirection = 'down'
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1
-      myGravity += 1
-      startupGravity()
+      startupGravityDown()
     }
       myCheckHitFloor()
       myCheckHitRoof()
@@ -129,11 +127,23 @@ function myCheckHitFloor(){
    }
    }
 
-   function startupGravity(){
+   function startupGravityDown(){
    clearInterval(myClock2)
    myClock2 = setInterval(function(){
       myCheckHitFloor();
       myCheckHitRoof();
+      myGravity += 0.2
+      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
+  }, 10)
+   if (myGravity == 1)
+   }
+
+   function startupGravityUp(){
+   clearInterval(myClock2)
+   myClock2 = setInterval(function(){
+      myCheckHitFloor();
+      myCheckHitRoof();
+      myGravity -= 0.2
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
   }, 10)
    }
