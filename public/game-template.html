@@ -133,9 +133,11 @@ function myCheckHitFloor(){
       myCheckHitFloor();
       myCheckHitRoof();
       myGravity += 0.2
+      if (myGravity == 1){
+      myGravity = 1
+   }
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
   }, 10)
-   if (myGravity == 1)
    }
 
    function startupGravityUp(){
