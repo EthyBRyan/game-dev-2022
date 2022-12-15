@@ -6,6 +6,9 @@
    if (myKey == 'd' || myKey == 'D' || myKey == 'ArrowRight') {
       if (gravityDirection == 'down' || gravityDirection == 'up') {
     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
+    facingDirectionH = 'right'
+    checkFacingDirection()
+    console.log()
     myCheckHitFloor()
       myCheckHitRoof()
       checkGravityDown()
@@ -15,6 +18,8 @@
    if (myKey == 'a' || myKey == 'A' || myKey == 'ArrowLeft') {
       if (gravityDirection == 'down' || gravityDirection == 'up') {
     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 7
+    facingDirectionH = 'left'
+    checkFacingDirection()
     myCheckHitFloor()
       myCheckHitRoof()
       checkGravityDown()
@@ -27,6 +32,8 @@
          gravityDirection = 'up'
          document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1
          startupGravityUp()
+         facingDirectionV = 'up'
+         checkFacingDirection()
       }
     myCheckHitFloor()
       myCheckHitRoof()
@@ -37,6 +44,8 @@
       gravityDirection = 'down'
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1
       startupGravityDown()
+      facingDirectionV = 'down'
+      checkFacingDirection()
     }
     myCheckHitFloor()
       myCheckHitRoof()
@@ -55,6 +64,8 @@
    let myInterval = 0;
    let backgroundAuto = 'off'
    let gravityDirection = 'none'
+   let facingDirectionV = 'down'
+   let facingDirectionH = 'right'
 
    // global functions here
 function myHitOther(my1,my2){
@@ -80,7 +91,6 @@ function myCheckHitFloor(){
        myGravity = 0
   } 
 }
-
    function myCheckHitRoof(){
    if ( myHitOther('myImg01','myImg02') ){
        //document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1 + 'px'
@@ -102,7 +112,6 @@ function myCheckHitFloor(){
       }
    }, 2)
    }
-
    function startupGravityUp(){
    clearInterval(myClock2)
    myClock2 = setInterval(function(){
@@ -117,7 +126,6 @@ function myCheckHitFloor(){
       }
    }, 2)
    }
-
 function gravity(){
    clearInterval(myClock2)
    myClock2 = setInterval(function(){
@@ -133,12 +141,26 @@ function checkGravityDown(){
          startupGravityDown()
    }
 }
-
 function checkGravityUp(){
    if ((myHitOther('myImg01','myImg02') != true) &&
       (gravityDirection == 'up')){
          startupGravityUp()
    }
+}
+function checkFacingDirection(){
+   if ((facingDirectionV == 'down') &&
+      (facingDirectionH == 'left')){
+      //document.getElementById('myImg01').style.width = 
+   }
+   //if (facingDirection == 'downright'){
+
+   //}
+   //if (facingDirection == 'upleft'){
+
+   //}
+   //if (facingDirection == 'upright'){
+
+   //}
 }
 
 </script>
@@ -170,8 +192,9 @@ function checkGravityUp(){
    myGravity = 1
    gravity()
    this.style.display='none'
+   document.getElementById('myDescription').style.display='none'
    }"></h1>
-<textarea readonly style="position:absolute; width:575px; height:150px; top:250px; left:225px;">
+<textarea readonly id='myDescription' style="position:absolute; width:575px; height:150px; top:250px; left:225px;">
 A and the Left Arrow move your character to the left.
 D and the Right Arrow move your character to the right.
 W and the Up Arrow swap the gravity to pull your character up.
