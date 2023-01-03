@@ -9,11 +9,12 @@ onkeydown="{
     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
     facingDirectionH = 'right'
     checkFacingDirection()
-    console.log()
     myCheckHitFloor()
       myCheckHitRoof()
       checkGravityDown()
       checkGravityUp()
+      myCheckRightWall()
+      myCheckHitFloor2()
    }
    }
    if (myKey == 'a' || myKey == 'A' || myKey == 'ArrowLeft') {
@@ -25,6 +26,8 @@ onkeydown="{
       myCheckHitRoof()
       checkGravityDown()
       checkGravityUp()
+      myCheckLeftWall()
+      myCheckHitFloor2()
    }
    }
    if (myKey == 'w' || myKey == 'W' || myKey == 'ArrowUp') {
@@ -99,6 +102,22 @@ function myCheckHitFloor(){
        myGravity = 0
    }
    }
+   function myCheckLeftWall(){
+      if ( myHitOther('myImg01','myImg04')){
+         document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7 + 'px'
+      }
+   }
+   function myCheckRightWall(){
+      if ( myHitOther('myImg01','myImg04')){
+         document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + -7 + 'px'
+      }
+   }
+   function myCheckHitFloor2(){
+   if ( myHitOther('myImg01','myImg04') ){
+       //document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1 + 'px'
+       myGravity = 0
+  } 
+}
 
    function startupGravityDown(){
    clearInterval(myClock2)
@@ -133,6 +152,7 @@ function gravity(){
    myClock2 = setInterval(function(){
       myCheckHitFloor();
       myCheckHitRoof();
+      myCheckHitFloor2()
       document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
   }, 2)
 }
@@ -174,9 +194,10 @@ function checkFacingDirection(){
 </script>
 
 
-<img id="myImg01" style="position:absolute; width:100px; height:80px; top:250px; left:475px;"  src="myImage01.jpg">
+<img id="myImg01" style="position:absolute; width:100px; height:80px; top:250px; left:475px;" src="myImage01.jpg">
 <img id="myImg02" style="position:absolute; width:750px; height:30px; top:100px; left:100px;" src="myImage01.jpg">
 <img id="myImg03" style="position:absolute; width:750px; height:30px; top:500px; left:100px;" src="myImage01.jpg">
+<img id="myImg04" style="position:absolute; width:100px; height:130px; top:400px; left:200px;" src="myImage01.jpg">
 
 <input type=button value="Start/Stop Auto Background" onclick="{
    if (backgroundAuto == 'off') {
@@ -193,7 +214,8 @@ function checkFacingDirection(){
       backgroundAuto = 'off'
       clearInterval(myClock)
    }
-}"><br><br><br><br><br><br><br><br><br>
+}"><br><br><br><br><br><br><br><br>
+<h2 align=center style="color:white" >Level 1</h2>
 
 <h1 align=center><input type=button value="Start"onclick="{
    gravityDirection = 'down'
@@ -201,8 +223,9 @@ function checkFacingDirection(){
    gravity()
    this.style.display='none'
    document.getElementById('myDescription').style.display='none'
+   document.getElementById('myLevel').style.display='none'
    }"></h1>
-<textarea readonly id='myDescription' style="position:absolute; width:575px; height:150px; top:250px; left:225px;">
+<textarea align=center readonly id='myDescription' style="position:absolute; width:575px; height:150px;">
 A and the Left Arrow move your character to the left.
 D and the Right Arrow move your character to the right.
 W and the Up Arrow swap the gravity to pull your character up.
