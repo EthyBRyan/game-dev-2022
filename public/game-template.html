@@ -4,37 +4,44 @@ onkeydown="{
    let myKey = event.key
    //let myKey = String.toLowerCase(event.key)
 
+   
    if (myKey == 'd' || myKey == 'D' || myKey == 'ArrowRight') {
       if (gravityDirection == 'down' || gravityDirection == 'up') {
-    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
+    document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + 7
     facingDirectionH = 'right'
     checkFacingDirection()
     myCheckHitFloor()
       myCheckHitRoof()
       checkGravityDown()
       checkGravityUp()
-      myCheckRightWall()
-      myCheckHitFloor2()
+      myCheckRightWall1()
+      if (myHitOther('myImgChar','myImg01')){
+      checkGravityDown1()
+      checkGravityUp1()
+      }
    }
    }
    if (myKey == 'a' || myKey == 'A' || myKey == 'ArrowLeft') {
       if (gravityDirection == 'down' || gravityDirection == 'up') {
-    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) - 7
+    document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) - 7
     facingDirectionH = 'left'
     checkFacingDirection()
     myCheckHitFloor()
       myCheckHitRoof()
       checkGravityDown()
       checkGravityUp()
-      myCheckLeftWall()
-      myCheckHitFloor2()
+      myCheckLeftWall1()
+      if (myHitOther('myImgChar','myImg01')){
+      checkGravityDown1()
+      checkGravityUp1()
+      }
    }
    }
    if (myKey == 'w' || myKey == 'W' || myKey == 'ArrowUp') {
       if ((myGravity == 0 ) &&
          (gravityDirection == 'down')) {
          gravityDirection = 'up'
-         document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1
+         document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) - 1
          startupGravityUp()
          facingDirectionV = 'up'
          checkFacingDirection()
@@ -46,7 +53,7 @@ onkeydown="{
     if ((myGravity == 0) &&
        (gravityDirection == 'up')) {
       gravityDirection = 'down'
-      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1
+      document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + 1
       startupGravityDown()
       facingDirectionV = 'down'
       checkFacingDirection()
@@ -66,6 +73,7 @@ src="https://jeremyckahn.github.io/keydrown/dist/keydrown.js"
    let myGravity = 0
    let myClock
    let myClock2 = 0
+   let meClock3 = 0
    let myInterval = 0;
    let backgroundAuto = 'off'
    let gravityDirection = 'none'
@@ -82,7 +90,7 @@ function myHitOther(my1,my2){
    right2  = left2 + parseInt(document.getElementById(my2).style.width)
    top2    = parseInt(document.getElementById(my2).style.top)   
    bottom2 = top2   + parseInt(document.getElementById(my2).style.height)
-   if ((right1  >=  left2  ) &&      	   
+   if ((right1  >=  left2  ) &&      	
        (bottom1 >=  top2   ) &&
        (left1   <=  right2 ) &&
        (top1    <=  bottom2) ){
@@ -91,33 +99,32 @@ function myHitOther(my1,my2){
 }
 
 function myCheckHitFloor(){
-   if ( myHitOther('myImg01','myImg03') ){
-       //document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1 + 'px'
+   if ( myHitOther('myImgChar','myImgFloor') ){
+       //document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) - 1 + 'px'
        myGravity = 0
   } 
 }
    function myCheckHitRoof(){
-   if ( myHitOther('myImg01','myImg02') ){
-       //document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 1 + 'px'
+   if ( myHitOther('myImgChar','myImgRoof') ){
+       //document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + 1 + 'px'
        myGravity = 0
    }
    }
-   function myCheckLeftWall(){
-      if ( myHitOther('myImg01','myImg04')){
-         document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7 + 'px'
+   function myCheckLeftWall1(){
+      if ( myHitOther('myImgChar','myImg01')){
+         document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + 7 + 'px'
       }
    }
-   function myCheckRightWall(){
-      if ( myHitOther('myImg01','myImg04')){
-         document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + -7 + 'px'
+   function myCheckRightWall1(){
+      if ( myHitOther('myImgChar','myImg01')){
+         document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + -7 + 'px'
       }
    }
-   function myCheckHitFloor2(){
-   if ( myHitOther('myImg01','myImg04') ){
-       //document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) - 1 + 'px'
-       myGravity = 0
-  } 
-}
+   function myCheckHitGround1(){
+      if (myHitOther('myImgChar','myImg01')){
+         myGravity = 0
+      }
+   }
 
    function startupGravityDown(){
    clearInterval(myClock2)
@@ -125,7 +132,7 @@ function myCheckHitFloor(){
       myCheckHitFloor();
       myCheckHitRoof();
       myGravity += 0.07
-      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
+      document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
       if (myGravity >= 1){
          clearInterval(myClock2)
          myGravity = 1
@@ -139,7 +146,7 @@ function myCheckHitFloor(){
       myCheckHitFloor();
       myCheckHitRoof();
       myGravity -= 0.07
-      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
+      document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
       if (myGravity <= -1){
          clearInterval(myClock2)
          myGravity = -1
@@ -152,52 +159,65 @@ function gravity(){
    myClock2 = setInterval(function(){
       myCheckHitFloor();
       myCheckHitRoof();
-      myCheckHitFloor2()
-      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + myGravity + 'px'
+      myCheckHitGround1()
+      document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
   }, 2)
 }
 
 function checkGravityDown(){
-   if ((myHitOther('myImg01','myImg03') != true) &&
+   if ((myHitOther('myImgChar','myImgFloor') != true) &&
       (gravityDirection == 'down')){
          startupGravityDown()
    }
 }
 function checkGravityUp(){
-   if ((myHitOther('myImg01','myImg02') != true) &&
+   if ((myHitOther('myImgChar','myImgRoof') != true) &&
       (gravityDirection == 'up')){
          startupGravityUp()
    }
 }
+function checkGravityDown1(){
+   if ((myHitOther('myImgChar','myImg01') != true) &&
+      (gravityDirection == 'down')){
+         startupGravityDown()
+   }
+}
+function checkGravityUp1(){
+   if ((myHitOther('myImgChar','myImg01') != true) &&
+      (gravityDirection == 'up')){
+         startupGravityUp()
+   }
+}
+
 function checkFacingDirection(){
    if ((facingDirectionV == 'down') &&
       (facingDirectionH == 'left')){
-      const scale = document.getElementById('myImg01')
+      const scale = document.getElementById('myImgChar')
       scale.style.transform = 'scale(1, 1)'
    }
    if ((facingDirectionV == 'down') &&
       (facingDirectionH == 'right')){
-      const scale = document.getElementById('myImg01')
+      const scale = document.getElementById('myImgChar')
       scale.style.transform = 'scale(-1, 1)'
    }
    if ((facingDirectionV == 'up') &&
       (facingDirectionH == 'left')){
-      const scale = document.getElementById('myImg01')
+      const scale = document.getElementById('myImgChar')
       scale.style.transform = 'scale(1, -1)'
    }
    if ((facingDirectionV == 'up') &&
       (facingDirectionH == 'right')){
-         const scale = document.getElementById('myImg01')
+         const scale = document.getElementById('myImgChar')
       scale.style.transform = 'scale(-1, -1)'
    }
 }
 </script>
 
 
-<img id="myImg01" style="position:absolute; width:100px; height:80px; top:250px; left:475px;" src="myImage01.jpg">
-<img id="myImg02" style="position:absolute; width:750px; height:30px; top:100px; left:100px;" src="myImage01.jpg">
-<img id="myImg03" style="position:absolute; width:750px; height:30px; top:500px; left:100px;" src="myImage01.jpg">
-<img id="myImg04" style="position:absolute; width:100px; height:130px; top:400px; left:200px;" src="myImage01.jpg">
+<img id="myImgChar" style="position:absolute; width:100px; height:80px; top:250px; left:475px;" src="myImage01.jpg">
+<img id="myImgRoof" style="position:absolute; width:750px; height:30px; top:100px; left:100px;" src="myImage01.jpg">
+<img id="myImgFloor" style="position:absolute; width:750px; height:30px; top:500px; left:100px;" src="myImage01.jpg">
+<img id="myImg01" style="position:absolute; width:100px; height:130px; top:400px; left:200px;" src="myImage01.jpg">
 
 <input type=button value="Start/Stop Auto Background" onclick="{
    if (backgroundAuto == 'off') {
@@ -215,7 +235,7 @@ function checkFacingDirection(){
       clearInterval(myClock)
    }
 }"><br><br><br><br><br><br><br><br>
-<h2 align=center style="color:white" >Level 1</h2>
+<h2 align=center style="color:white" id='myLevel'>Level 1</h2>
 
 <h1 align=center><input type=button value="Start"onclick="{
    gravityDirection = 'down'
@@ -233,6 +253,6 @@ S and the Down Arrow swap the gravity to pull your character down.
 You can only swap the gravity if your character is on solid ground.
 Falling to the bottom or the top of the screen will result in a game over.
 Touching the spikes will also result in a game over.
-Get to the ? to win.
+Get to the door to win.
 </textarea>
 
