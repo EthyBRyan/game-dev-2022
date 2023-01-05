@@ -15,26 +15,24 @@ onkeydown="{
       checkGravityDown()
       checkGravityUp()
       myCheckRightWall1()
-      if (myHitOther('myImgChar','myImg01')){
-      checkGravityDown1()
-      checkGravityUp1()
-      }
    }
    }
    if (myKey == 'a' || myKey == 'A' || myKey == 'ArrowLeft') {
       if (gravityDirection == 'down' || gravityDirection == 'up') {
-    document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) - 7
-    facingDirectionH = 'left'
-    checkFacingDirection()
-    myCheckHitFloor()
-      myCheckHitRoof()
-      checkGravityDown()
-      checkGravityUp()
-      myCheckLeftWall1()
-      if (myHitOther('myImgChar','myImg01')){
-      checkGravityDown1()
-      checkGravityUp1()
-      }
+         
+         myClock3 = setInterval(function(){
+         document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) - 1
+   }, 2)
+
+    //document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) - 7
+    //facingDirectionH = 'left'
+    //checkFacingDirection()
+    //myCheckHitFloor()
+      //myCheckHitRoof()
+      //checkGravityDown()
+      //checkGravityUp()
+      //myCheckLeftWall1()
+
    }
    }
    if (myKey == 'w' || myKey == 'W' || myKey == 'ArrowUp') {
@@ -73,7 +71,7 @@ src="https://jeremyckahn.github.io/keydrown/dist/keydrown.js"
    let myGravity = 0
    let myClock
    let myClock2 = 0
-   let meClock3 = 0
+   let meClock3 = 1
    let myInterval = 0;
    let backgroundAuto = 'off'
    let gravityDirection = 'none'
@@ -123,6 +121,7 @@ function myCheckHitFloor(){
    function myCheckHitGround1(){
       if (myHitOther('myImgChar','myImg01')){
          myGravity = 0
+         document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + -1 + 'px'
       }
    }
 
@@ -166,12 +165,14 @@ function gravity(){
 
 function checkGravityDown(){
    if ((myHitOther('myImgChar','myImgFloor') != true) &&
+      (myHitOther('myImgChar','myImg01') != true) &&
       (gravityDirection == 'down')){
          startupGravityDown()
    }
 }
 function checkGravityUp(){
    if ((myHitOther('myImgChar','myImgRoof') != true) &&
+      (myHitOther('myImgChar','myImg01') != true) &&
       (gravityDirection == 'up')){
          startupGravityUp()
    }
