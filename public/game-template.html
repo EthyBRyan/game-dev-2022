@@ -2,8 +2,9 @@
 <body id="myBody" style="background-repeat:repeat; background-size: 80%" background="myBackground01.jpg"
 onkeydown="{
    let myKey = event.key
+   myClock3 = 1
    //let myKey = String.toLowerCase(event.key)
-
+   document.getElementById('myDiv01').innerHTML = myKey
    
    if (myKey == 'd' || myKey == 'D' || myKey == 'ArrowRight') {
       if (gravityDirection == 'down' || gravityDirection == 'up') {
@@ -17,10 +18,12 @@ onkeydown="{
       myCheckRightWall1()
    }
    }
-   if (myKey == 'a' || myKey == 'A' || myKey == 'ArrowLeft') {
-      if (gravityDirection == 'down' || gravityDirection == 'up') {
-         
+   if ((myKey == 'a' || myKey == 'A' || myKey == 'ArrowLeft') &&
+       (gravityDirection == 'down' || gravityDirection == 'up') &&
+       (moving != 'left')) {
+         moving = 'left'
          myClock3 = setInterval(function(){
+            console.log(myClock3)
          document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) - 1
    }, 2)
 
@@ -34,10 +37,8 @@ onkeydown="{
       //myCheckLeftWall1()
 
    }
-   }
    if (myKey == 'w' || myKey == 'W' || myKey == 'ArrowUp') {
-      if ((myGravity == 0 ) &&
-         (gravityDirection == 'down')) {
+      if ((myGravity == 0 ) && (gravityDirection == 'down')) {
          gravityDirection = 'up'
          document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) - 1
          startupGravityUp()
@@ -59,6 +60,11 @@ onkeydown="{
     myCheckHitFloor()
       myCheckHitRoof()
    }
+}" onkeyup="{
+    myKey = ''
+    moving = 'false'
+    clearInterval(myClock3)
+    document.getElementById('myDiv01').innerHTML = myKey
 }">
 
 
@@ -71,12 +77,13 @@ src="https://jeremyckahn.github.io/keydrown/dist/keydrown.js"
    let myGravity = 0
    let myClock
    let myClock2 = 0
-   let meClock3 = 1
+   let meClock3 = 0
    let myInterval = 0;
    let backgroundAuto = 'off'
    let gravityDirection = 'none'
    let facingDirectionV = 'down'
    let facingDirectionH = 'right'
+   let moving = 'false'
 
    // global functions here
 function myHitOther(my1,my2){
@@ -191,23 +198,19 @@ function checkGravityUp1(){
 }
 
 function checkFacingDirection(){
-   if ((facingDirectionV == 'down') &&
-      (facingDirectionH == 'left')){
+   if ((facingDirectionV == 'down') && (facingDirectionH == 'left')){
       const scale = document.getElementById('myImgChar')
       scale.style.transform = 'scale(1, 1)'
    }
-   if ((facingDirectionV == 'down') &&
-      (facingDirectionH == 'right')){
+   if ((facingDirectionV == 'down') && (facingDirectionH == 'right')){
       const scale = document.getElementById('myImgChar')
       scale.style.transform = 'scale(-1, 1)'
    }
-   if ((facingDirectionV == 'up') &&
-      (facingDirectionH == 'left')){
+   if ((facingDirectionV == 'up') && (facingDirectionH == 'left')){
       const scale = document.getElementById('myImgChar')
       scale.style.transform = 'scale(1, -1)'
    }
-   if ((facingDirectionV == 'up') &&
-      (facingDirectionH == 'right')){
+   if ((facingDirectionV == 'up') && (facingDirectionH == 'right')){
          const scale = document.getElementById('myImgChar')
       scale.style.transform = 'scale(-1, -1)'
    }
@@ -218,7 +221,7 @@ function checkFacingDirection(){
 <img id="myImgChar" style="position:absolute; width:100px; height:100px; top:250px; left:475px;" src="myImage01.jpg">
 <img id="myImgRoof" style="position:absolute; width:750px; height:30px; top:100px; left:100px;" src="Ground.jpg">
 <img id="myImgFloor" style="position:absolute; width:750px; height:30px; top:500px; left:100px;" src="Ground.jpg">
-<img id="myImg01" style="position:absolute; width:100px; height:130px; top:400px; left:200px;" src="myImage01.jpg">
+<img id="myImg01" style="position:absolute; width:100px; height:130px; top:400px; left:200px;" src="Ground.jpg">
 
 <input type=button value="Start/Stop Auto Background" onclick="{
    if (backgroundAuto == 'off') {
@@ -237,6 +240,7 @@ function checkFacingDirection(){
    }
 }"><br><br><br><br><br><br><br><br>
 <h2 align=center style="color:white" id='myLevel'>Level 1</h2>
+
 
 <h1 align=center><input type=button value="Start"onclick="{
    gravityDirection = 'down'
@@ -257,3 +261,4 @@ Touching the spikes will also result in a game over.
 Get to the door to win.
 </textarea>
 
+<div id="myDiv01" style="color:yellow">..</div>
