@@ -1,30 +1,32 @@
 
 <body id="myBody" style="background-repeat:repeat; background-size: 80%" background="myBackground01.jpg"
 onkeydown="{
-   let myKey = event.key
-   if (myKey == 'a' || myKey == 'A' || myKey == 'ArrowLeft'){
-      document.getElementById('myDiv01').innerHTML = myKey
+   let myKeyLeft = event.key
+   let myKeyRight = event.key
+   let myKeyUp = event.key
+   let myKeyDown = event.key
+   if (myKeyLeft == 'a' || myKeyLeft == 'A' || myKeyLeft == 'ArrowLeft'){
+      document.getElementById('myDiv01').innerHTML = myKeyLeft
    }
-   if (myKey == 'd' || myKey == 'D' || myKey == 'ArrowRight'){
-      document.getElementById('myDiv02').innerHTML = myKey
+   if (myKeyRight == 'd' || myKeyRight == 'D' || myKeyRight == 'ArrowRight'){
+      document.getElementById('myDiv02').innerHTML = myKeyRight
    }
-   if (myKey == 'w' || myKey == 'W' || myKey == 'ArrowUp'){
-      document.getElementById('myDiv03').innerHTML = myKey
+   if (myKeyUp == 'w' || myKeyUp == 'W' || myKeyUp == 'ArrowUp'){
+      document.getElementById('myDiv03').innerHTML = myKeyUp
    }
-   if (myKey == 's' || myKey == 'S' || myKey == 'ArrowDown'){
-      document.getElementById('myDiv04').innerHTML = myKey
+   if (myKeyDown == 's' || myKeyDown == 'S' || myKeyDown == 'ArrowDown'){
+      document.getElementById('myDiv04').innerHTML = myKeyDown
    }
    //let myKey = String.toLowerCase(event.key)
-   
 
-   if ((myKey == 'a' || myKey == 'A' || myKey == 'ArrowLeft') &&
+
+   if ((myKeyLeft == 'a' || myKeyLeft == 'A' || myKeyLeft == 'ArrowLeft') &&
        (gravityDirection == 'down' || gravityDirection == 'up') &&
-       (moving != 'left')) {
-         moving = 'left'
+       (movingLeft == 'false')) {
+         movingLeft = 'true'
          myClockLeft = 1
          clearInterval(myClockLeft)
          myClockLeft = setInterval(function(){
-            console.log(gravity)
             document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) - 1
             facingDirectionH = 'left'
             checkFacingDirection()
@@ -36,10 +38,10 @@ onkeydown="{
             
    }, 2)
    }
-   if ((myKey == 'd' || myKey == 'D' || myKey == 'ArrowRight') &&
+   if ((myKeyRight == 'd' || myKeyRight == 'D' || myKeyRight == 'ArrowRight') &&
        (gravityDirection == 'down' || gravityDirection == 'up') &&
-       (moving != 'right')) {
-         moving = 'right'
+       (movingRight == 'false')) {
+         movingRight = 'true'
          myClockRight = 1
          clearInterval(myClockRight)
          myClockRight = setInterval(function(){
@@ -53,7 +55,7 @@ onkeydown="{
             myCheckRightWall1()
          }, 2)
    }
-   if (myKey == 'w' || myKey == 'W' || myKey == 'ArrowUp') {
+   if (myKeyUp == 'w' || myKeyUp == 'W' || myKeyUp == 'ArrowUp') {
       if ((myGravity == 0 ) && (gravityDirection == 'down')) {
          gravityDirection = 'up'
          document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) - 1
@@ -64,7 +66,7 @@ onkeydown="{
     myCheckHitFloor()
       myCheckHitRoof()
    }
-   if (myKey == 's' || myKey == 'S' || myKey == 'ArrowDown') {
+   if (myKeyDown == 's' || myKeyDown == 'S' || myKeyDown == 'ArrowDown') {
     if ((myGravity == 0) && (gravityDirection == 'up')) {
       gravityDirection = 'down'
       document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + 1
@@ -76,26 +78,32 @@ onkeydown="{
       myCheckHitRoof()
    }
 }" onkeyup="{
-   if (myDiv01 != ''){
-
+   let myKeyLeft = event.key
+   let myKeyRight = event.key
+   let myKeyUp = event.key
+   let myKeyDown = event.key
+   if (myKeyLeft != ''){
+      myKeyLeft = ''
+      clearInterval(myClockLeft)
+      movingLeft = 'false'
    }
-   if (myDiv02 != ''){
-
+   if (myKeyRight != ''){
+      myKeyRight = ''
+      clearInterval(myClockRight)
+      movingRight = 'false'
    }
-   if (myDiv03 != ''){
-
+   if (myKeyUp != ''){
+      myKeyUp = ''
    }
-   if (myDiv04 != ''){
-
+   if (myKeyDown != ''){
+      myKeyDown = ''
    }
-    myKey = ''
-    moving = 'false'
-    clearInterval(myClockLeft)
-    clearInterval(myClockRight)
-    document.getElementById('myDiv01').innerHTML = myKey
-    document.getElementById('myDiv02').innerHTML = myKey
-    document.getElementById('myDiv03').innerHTML = myKey
-    document.getElementById('myDiv04').innerHTML = myKey
+   //if ((myKeyLeft != ))
+
+    document.getElementById('myDiv01').innerHTML = myKeyLeft
+    document.getElementById('myDiv02').innerHTML = myKeyRight
+    document.getElementById('myDiv03').innerHTML = myKeyUp
+    document.getElementById('myDiv04').innerHTML = myKeyDown
 }">
 
 
@@ -115,7 +123,8 @@ src="https://jeremyckahn.github.io/keydrown/dist/keydrown.js"
    let gravityDirection = 'none'
    let facingDirectionV = 'down'
    let facingDirectionH = 'right'
-   let moving = 'false'
+   let movingLeft = 'false'
+   let movingRight = 'false'
 
    // global functions here
 function myHitOther(my1,my2){
