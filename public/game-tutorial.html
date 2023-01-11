@@ -64,6 +64,9 @@ onkeydown="{
     myCheckHitFloor()
       myCheckHitRoof()
    }
+   if (myHitOther('myImgChar','myImgDoor')){
+      document.getElementById('Win').style.top = parseInt(document.getElementById('Win').style.top) + 1
+   }
 }" onkeyup="{
    let myKeyLeft = event.key
    let myKeyRight = event.key
@@ -247,10 +250,11 @@ function checkFacingDirection(){
 </script>
 
 
-<img id="myImgChar" style="position:absolute; width:100px; height:100px; top:250px; left:475px;" src="myImage01.jpg">
+<img id="myImgChar" style="position:absolute; width:100px; height:100px; top:400px; left:200px;" src="myImage01.jpg">
 <img id="myImgRoof" style="position:absolute; width:750px; height:30px; top:100px; left:100px;" src="Ground.jpg">
 <img id="myImgFloor" style="position:absolute; width:750px; height:30px; top:500px; left:100px;" src="Ground.jpg">
-<img id="myImg01" style="position:absolute; width:100px; height:130px; top:400px; left:200px;" src="Ground.jpg">
+<img id="myImgDoor" style="position:absolute; width:60px; height:100px; top:400px; left:750px;" src="Door.jpg">
+<img id="myImg01" style="position:absolute; width:100px; height:130px; top:400px; left:400px;" src="Ground.jpg">
 
 <input type=button value="Start/Stop Auto Background" onclick="{
    if (backgroundAuto == 'off') {
@@ -271,13 +275,14 @@ function checkFacingDirection(){
 <h2 align=center style="color:white" id='myLevel'>Level 1</h2>
 
 
-<h1 align=center><input type=button value="Start"onclick="{
+<h1 align=center><input type=button id="myStart" value="Start"onclick="{
    gravityDirection = 'down'
    myGravity = 1
    gravity()
    this.style.display='none'
    document.getElementById('myDescription').style.display='none'
    document.getElementById('myLevel').style.display='none'
+   document.getElementById('Win').style.display='none'
    }"></h1>
 <textarea align=center readonly id='myDescription' style="position:absolute; width:575px; height:150px;">
 A and the Left Arrow move your character to the left.
@@ -289,3 +294,5 @@ Falling to the bottom or the top of the screen will result in a game over.
 Touching the spikes will also result in a game over.
 Get to the door to win.
 </textarea>
+
+<h2 align=center style="color:white" id='Win'>Congratulations, you beat the tutorial!</h2>
