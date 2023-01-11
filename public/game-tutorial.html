@@ -5,18 +5,18 @@ onkeydown="{
    let myKeyRight = event.key
    let myKeyUp = event.key
    let myKeyDown = event.key
-   if (myKeyLeft == 'a' || myKeyLeft == 'A' || myKeyLeft == 'ArrowLeft'){
-      document.getElementById('myDiv01').innerHTML = myKeyLeft
-   }
-   if (myKeyRight == 'd' || myKeyRight == 'D' || myKeyRight == 'ArrowRight'){
-      document.getElementById('myDiv02').innerHTML = myKeyRight
-   }
-   if (myKeyUp == 'w' || myKeyUp == 'W' || myKeyUp == 'ArrowUp'){
-      document.getElementById('myDiv03').innerHTML = myKeyUp
-   }
-   if (myKeyDown == 's' || myKeyDown == 'S' || myKeyDown == 'ArrowDown'){
-      document.getElementById('myDiv04').innerHTML = myKeyDown
-   }
+   //if (myKeyLeft == 'a' || myKeyLeft == 'A' || myKeyLeft == 'ArrowLeft'){
+      //document.getElementById('myDiv01').innerHTML = myKeyLeft
+   //}
+   //if (myKeyRight == 'd' || myKeyRight == 'D' || myKeyRight == 'ArrowRight'){
+      //document.getElementById('myDiv02').innerHTML = myKeyRight
+   //}
+   //if (myKeyUp == 'w' || myKeyUp == 'W' || myKeyUp == 'ArrowUp'){
+      //document.getElementById('myDiv03').innerHTML = myKeyUp
+   //}
+   //if (myKeyDown == 's' || myKeyDown == 'S' || myKeyDown == 'ArrowDown'){
+      //document.getElementById('myDiv04').innerHTML = myKeyDown
+   //}
    //let myKey = String.toLowerCase(event.key)
 
 
@@ -35,7 +35,6 @@ onkeydown="{
             checkGravityDown()
             checkGravityUp()
             myCheckLeftWall1()
-            
    }, 2)
    }
    if ((myKeyRight == 'd' || myKeyRight == 'D' || myKeyRight == 'ArrowRight') &&
@@ -82,28 +81,29 @@ onkeydown="{
    let myKeyRight = event.key
    let myKeyUp = event.key
    let myKeyDown = event.key
-   if (myKeyLeft != ''){
+   if ((myKeyLeft == 'a' || myKeyLeft == 'A' || myKeyLeft == 'ArrowLeft') &&
+      (myKeyUp != 'w' || myKeyUp != 'W' || myKeyUp != 'ArrowUp' || myKeyDown != 's' || myKeyDown != 'S' || myKeyDown != 'ArrowDown')){
       myKeyLeft = ''
       clearInterval(myClockLeft)
       movingLeft = 'false'
    }
-   if (myKeyRight != ''){
+   if ((myKeyLeft == 'a' || myKeyLeft == 'A' || myKeyLeft == 'ArrowLeft') &&
+      (myKeyUp == 'w' || myKeyUp == 'W' || myKeyUp == 'ArrowUp' || myKeyDown == 's' || myKeyDown == 'S' || myKeyDown == 'ArrowDown')){
+      myKeyUp = ''
+   }
+   if (myKeyRight == 'd' || myKeyRight == 'D' || myKeyRight == 'ArrowRight'){
       myKeyRight = ''
       clearInterval(myClockRight)
       movingRight = 'false'
    }
-   if (myKeyUp != ''){
+   if (myKeyUp == 'w' || myKeyUp == 'W' || myKeyUp == 'ArrowUp'){
       myKeyUp = ''
    }
-   if (myKeyDown != ''){
+   if (myKeyDown == 's' || myKeyDown == 'S' || myKeyDown == 'ArrowDown'){
       myKeyDown = ''
    }
-   //if ((myKeyLeft != ))
 
-    document.getElementById('myDiv01').innerHTML = myKeyLeft
-    document.getElementById('myDiv02').innerHTML = myKeyRight
-    document.getElementById('myDiv03').innerHTML = myKeyUp
-    document.getElementById('myDiv04').innerHTML = myKeyDown
+
 }">
 
 
@@ -302,7 +302,7 @@ Touching the spikes will also result in a game over.
 Get to the door to win.
 </textarea>
 
-<div id="myDiv01" style="color:yellow">..</div>
-<div id="myDiv02" style="color:yellow">..</div>
-<div id="myDiv03" style="color:yellow">..</div>
-<div id="myDiv04" style="color:yellow">..</div>
+<div id="myDiv01" style="color:yellow"></div>
+<div id="myDiv02" style="color:yellow"></div>
+<div id="myDiv03" style="color:yellow"></div>
+<div id="myDiv04" style="color:yellow"></div>
