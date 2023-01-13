@@ -18,11 +18,13 @@ onkeydown="{
             document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) - 1
             facingDirectionH = 'left'
             checkFacingDirection()
+            myCheckHitLeftWall()
             myCheckHitFloor()
             myCheckHitRoof()
             checkGravityDown()
             checkGravityUp()
             myCheckLeftWall1()
+            checkWin()
    }, 2)
    }
    if ((myKeyRight == 'd' || myKeyRight == 'D' || myKeyRight == 'ArrowRight') &&
@@ -35,11 +37,13 @@ onkeydown="{
             document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + 1
             facingDirectionH = 'right'
             checkFacingDirection()
+            myCheckHitRightWall()
             myCheckHitFloor()
             myCheckHitRoof()
             checkGravityDown()
             checkGravityUp()
             myCheckRightWall1()
+            checkWin()
          }, 2)
    }
    if (myKeyUp == 'w' || myKeyUp == 'W' || myKeyUp == 'ArrowUp') {
@@ -94,7 +98,6 @@ onkeydown="{
       myKeyDown = ''
    }
 
-
 }">
 
 
@@ -135,6 +138,16 @@ function myHitOther(my1,my2){
    }
 }
 
+function myCheckHitLeftWall(){
+   if (myHitOther('myImgChar','myImgLeftWall')){
+      document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + 1 + 'px'
+   }
+}
+function myCheckHitRightWall(){
+   if (myHitOther('myImgChar','myImgRightWall')){
+      document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + -1 + 'px'
+   }
+}
 function myCheckHitFloor(){
    if ( myHitOther('myImgChar','myImgFloor') ){
        //document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) - 1 + 'px'
@@ -148,19 +161,25 @@ function myCheckHitFloor(){
    }
    }
    function myCheckLeftWall1(){
-      if ( myHitOther('myImgChar','myImg01')){
-         document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + 7 + 'px'
+      if ( myHitOther('myImgChar','myImgGround01')){
+         document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + 1 + 'px'
       }
    }
    function myCheckRightWall1(){
-      if ( myHitOther('myImgChar','myImg01')){
-         document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + -7 + 'px'
+      if ( myHitOther('myImgChar','myImgGround01')){
+         document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + -1 + 'px'
       }
    }
-   function myCheckHitGround1(){
-      if (myHitOther('myImgChar','myImg01')){
+   function myCheckHitFloor1(){
+      if (myHitOther('myImgChar','myImgGround01') && (gravityDirection == 'down')){
          myGravity = 0
          document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + -1 + 'px'
+      }
+   }
+   function myCheckHitRoof1(){
+      if (myHitOther('myImgChar','myImgGround01') && (gravityDirection == 'up')){
+         myGravity = 0
+         document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + 1 + 'px'
       }
    }
 
@@ -169,6 +188,9 @@ function myCheckHitFloor(){
    myClock2 = setInterval(function(){
       myCheckHitFloor();
       myCheckHitRoof();
+      myCheckHitFloor1()
+      myCheckHitRoof1()
+      checkWin()
       myGravity += 0.07
       document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
       if (myGravity >= 1){
@@ -183,6 +205,9 @@ function myCheckHitFloor(){
    myClock2 = setInterval(function(){
       myCheckHitFloor();
       myCheckHitRoof();
+      myCheckHitFloor1()
+      myCheckHitRoof1()
+      checkWin()
       myGravity -= 0.07
       document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
       if (myGravity <= -1){
@@ -197,33 +222,23 @@ function gravity(){
    myClock2 = setInterval(function(){
       myCheckHitFloor();
       myCheckHitRoof();
-      myCheckHitGround1()
+      myCheckHitFloor1()
+      myCheckHitRoof1()
+      checkWin()
       document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
   }, 2)
 }
 
 function checkGravityDown(){
    if ((myHitOther('myImgChar','myImgFloor') != true) &&
-      (myHitOther('myImgChar','myImg01') != true) &&
+      (myHitOther('myImgChar','myImgGround01') != true) &&
       (gravityDirection == 'down')){
          startupGravityDown()
    }
 }
 function checkGravityUp(){
    if ((myHitOther('myImgChar','myImgRoof') != true) &&
-      (myHitOther('myImgChar','myImg01') != true) &&
-      (gravityDirection == 'up')){
-         startupGravityUp()
-   }
-}
-function checkGravityDown1(){
-   if ((myHitOther('myImgChar','myImg01') != true) &&
-      (gravityDirection == 'down')){
-         startupGravityDown()
-   }
-}
-function checkGravityUp1(){
-   if ((myHitOther('myImgChar','myImg01') != true) &&
+      (myHitOther('myImgChar','myImgGround01') != true) &&
       (gravityDirection == 'up')){
          startupGravityUp()
    }
@@ -247,14 +262,25 @@ function checkFacingDirection(){
       scale.style.transform = 'scale(-1, -1)'
    }
 }
+
+function checkWin(){
+   if (myHitOther ('myImgChar','myImgDoor')){
+      location = 'game-level1'
+   }
+}
+function gameOver(){
+   location = 'game-tutorial.html'
+}
 </script>
 
 
 <img id="myImgChar" style="position:absolute; width:100px; height:100px; top:400px; left:200px;" src="myImage01.jpg">
-<img id="myImgRoof" style="position:absolute; width:750px; height:30px; top:100px; left:100px;" src="Ground.jpg">
-<img id="myImgFloor" style="position:absolute; width:750px; height:30px; top:500px; left:100px;" src="Ground.jpg">
-<img id="myImgDoor" style="position:absolute; width:60px; height:100px; top:400px; left:750px;" src="Door.jpg">
-<img id="myImg01" style="position:absolute; width:100px; height:130px; top:400px; left:400px;" src="Ground.jpg">
+<img id="myImgLeftWall" style="position:absolute; width:30px; height:625px; top:50px; left:100px;" src="Ground.jpg">
+<img id="myImgRightWall" style="position:absolute; width:30px; height:625px; top:50px; left:1370px;" src="Ground.jpg">
+<img id="myImgRoof" style="position:absolute; width:1300px; height:30px; top:50px; left:100px;" src="Ground.jpg">
+<img id="myImgFloor" style="position:absolute; width:1300px; height:30px; top:650px; left:100px;" src="Ground.jpg">
+<img id="myImgDoor" style="position:absolute; width:60px; height:100px; top:550px; left:1200px;" src="Door.jpg">
+<img id="myImgGround01" style="position:absolute; width:100px; height:350px; top:300px; left:400px;" src="Ground.jpg">
 
 <input type=button value="Start/Stop Auto Background" onclick="{
    if (backgroundAuto == 'off') {
@@ -290,9 +316,8 @@ D and the Right Arrow move your character to the right.
 W and the Up Arrow swap the gravity to pull your character up.
 S and the Down Arrow swap the gravity to pull your character down.
 You can only swap the gravity if your character is on solid ground.
-Falling to the bottom or the top of the screen will result in a game over.
-Touching the spikes will also result in a game over.
+Moving left or right in the air will stop you from falling,
+but touching a wall will make you slide up or down, except for the borders.
+Touching the spikes will result in a game over.
 Get to the door to win.
 </textarea>
-
-<h2 align=center style="color:white" id='Win'>Congratulations, you beat the tutorial!</h2>
