@@ -24,6 +24,8 @@ onkeydown="{
             checkGravityDown()
             checkGravityUp()
             myCheckLeftWall1()
+            checkSpikes()
+            checkSpikes2()
             checkWin()
    }, 2)
    }
@@ -43,6 +45,8 @@ onkeydown="{
             checkGravityDown()
             checkGravityUp()
             myCheckRightWall1()
+            checkSpikes()
+            checkSpikes2()
             checkWin()
          }, 2)
    }
@@ -102,7 +106,6 @@ onkeydown="{
 
 
 <script>
-
 src="https://jeremyckahn.github.io/keydrown/dist/keydrown.js"
 
    // global variables here
@@ -190,6 +193,8 @@ function myCheckHitFloor(){
       myCheckHitRoof();
       myCheckHitFloor1()
       myCheckHitRoof1()
+      checkSpikes()
+      checkSpikes2()
       checkWin()
       myGravity += 0.07
       document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
@@ -207,6 +212,8 @@ function myCheckHitFloor(){
       myCheckHitRoof();
       myCheckHitFloor1()
       myCheckHitRoof1()
+      checkSpikes()
+      checkSpikes2()
       checkWin()
       myGravity -= 0.07
       document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
@@ -224,6 +231,8 @@ function gravity(){
       myCheckHitRoof();
       myCheckHitFloor1()
       myCheckHitRoof1()
+      checkSpikes()
+      checkSpikes2()
       checkWin()
       document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
   }, 2)
@@ -271,16 +280,28 @@ function checkWin(){
 function gameOver(){
    location = 'game-tutorial.html'
 }
+function checkSpikes(){
+   if (myHitOther ('myImgChar','myImgSpike01')){
+      gameOver()
+   }
+}
+function checkSpikes2(){
+   if (myHitOther ('myImgChar','myImgSpike02')){
+      gameOver()
+   }
+}
 </script>
 
 
-<img id="myImgChar" style="position:absolute; width:100px; height:100px; top:400px; left:200px;" src="myImage01.jpg">
+<img id="myImgChar" style="position:absolute; width:100px; height:100px; top:550px; left:200px;" src="myImage01.jpg">
 <img id="myImgLeftWall" style="position:absolute; width:30px; height:625px; top:50px; left:100px;" src="Ground.jpg">
 <img id="myImgRightWall" style="position:absolute; width:30px; height:625px; top:50px; left:1370px;" src="Ground.jpg">
 <img id="myImgRoof" style="position:absolute; width:1300px; height:30px; top:50px; left:100px;" src="Ground.jpg">
 <img id="myImgFloor" style="position:absolute; width:1300px; height:30px; top:650px; left:100px;" src="Ground.jpg">
 <img id="myImgDoor" style="position:absolute; width:60px; height:100px; top:550px; left:1200px;" src="Door.jpg">
 <img id="myImgGround01" style="position:absolute; width:100px; height:350px; top:300px; left:400px;" src="Ground.jpg">
+<img id="myImgSpike01" style="position:absolute; width:100px; height:100px; top:80px; left:600px;" src="Small_Spike_Full.jpg">
+<img id="myImgSpike02" style="position:absolute; width:500px; height:100px; top:550px; left:500px;" src="Small_Spike_Full.jpg">
 
 <input type=button value="Start/Stop Auto Background" onclick="{
    if (backgroundAuto == 'off') {
@@ -298,26 +319,29 @@ function gameOver(){
       clearInterval(myClock)
    }
 }"><br><br><br><br><br><br><br><br>
-<h2 align=center style="color:white" id='myLevel'>Level 1</h2>
+<h2 align=center style="color:white" id='myLevel'>Tutorial</h2>
 
 
 <h1 align=center><input type=button id="myStart" value="Start"onclick="{
+   const scale = document.getElementById('myImgSpike01')
+      scale.style.transform = 'scale(1, -1)'
    gravityDirection = 'down'
+   checkFacingDirection()
    myGravity = 1
    gravity()
    this.style.display='none'
    document.getElementById('myDescription').style.display='none'
    document.getElementById('myLevel').style.display='none'
-   document.getElementById('Win').style.display='none'
    }"></h1>
-<textarea align=center readonly id='myDescription' style="position:absolute; width:575px; height:150px;">
+<textarea readonly id='myDescription' style="position:absolute; width:575px; height:175px; top:300px; left:500px;">
 A and the Left Arrow move your character to the left.
 D and the Right Arrow move your character to the right.
 W and the Up Arrow swap the gravity to pull your character up.
 S and the Down Arrow swap the gravity to pull your character down.
 You can only swap the gravity if your character is on solid ground.
 Moving left or right in the air will stop you from falling,
-but touching a wall will make you slide up or down, except for the borders.
-Touching the spikes will result in a game over.
+but moving against a wall will make you slide up or down,
+depending on the current gravity, except for the borders.
+Touching the spikes will result in a game over, which resets the level.
 Get to the door to win.
 </textarea>

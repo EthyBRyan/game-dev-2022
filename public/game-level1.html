@@ -1,0 +1,333 @@
+
+<body id="myBody" style="background-repeat:repeat; background-size: 80%" background="myBackground01.jpg"
+onkeydown="{
+   let myKeyLeft = event.key
+   let myKeyRight = event.key
+   let myKeyUp = event.key
+   let myKeyDown = event.key
+   //let myKey = String.toLowerCase(event.key)
+
+
+   if ((myKeyLeft == 'a' || myKeyLeft == 'A' || myKeyLeft == 'ArrowLeft') &&
+       (gravityDirection == 'down' || gravityDirection == 'up') &&
+       (movingLeft == 'false')) {
+         movingLeft = 'true'
+         myClockLeft = 1
+         clearInterval(myClockLeft)
+         myClockLeft = setInterval(function(){
+            document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) - 1
+            facingDirectionH = 'left'
+            checkFacingDirection()
+            myCheckHitLeftWall()
+            myCheckHitFloor()
+            myCheckHitRoof()
+            checkGravityDown()
+            checkGravityUp()
+            myCheckLeftWall1()
+            checkSpikes()
+            checkSpikes2()
+            checkWin()
+   }, 2)
+   }
+   if ((myKeyRight == 'd' || myKeyRight == 'D' || myKeyRight == 'ArrowRight') &&
+       (gravityDirection == 'down' || gravityDirection == 'up') &&
+       (movingRight == 'false')) {
+         movingRight = 'true'
+         myClockRight = 1
+         clearInterval(myClockRight)
+         myClockRight = setInterval(function(){
+            document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + 1
+            facingDirectionH = 'right'
+            checkFacingDirection()
+            myCheckHitRightWall()
+            myCheckHitFloor()
+            myCheckHitRoof()
+            checkGravityDown()
+            checkGravityUp()
+            myCheckRightWall1()
+            checkSpikes()
+            checkSpikes2()
+            checkWin()
+         }, 2)
+   }
+   if (myKeyUp == 'w' || myKeyUp == 'W' || myKeyUp == 'ArrowUp') {
+      if ((myGravity == 0 ) && (gravityDirection == 'down')) {
+         gravityDirection = 'up'
+         document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) - 1
+         startupGravityUp()
+         facingDirectionV = 'up'
+         checkFacingDirection()
+      }
+    myCheckHitFloor()
+      myCheckHitRoof()
+   }
+   if (myKeyDown == 's' || myKeyDown == 'S' || myKeyDown == 'ArrowDown') {
+    if ((myGravity == 0) && (gravityDirection == 'up')) {
+      gravityDirection = 'down'
+      document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + 1
+      startupGravityDown()
+      facingDirectionV = 'down'
+      checkFacingDirection()
+    }
+    myCheckHitFloor()
+      myCheckHitRoof()
+   }
+   if (myHitOther('myImgChar','myImgDoor')){
+      document.getElementById('Win').style.top = parseInt(document.getElementById('Win').style.top) + 1
+   }
+}" onkeyup="{
+   let myKeyLeft = event.key
+   let myKeyRight = event.key
+   let myKeyUp = event.key
+   let myKeyDown = event.key
+   if ((myKeyLeft == 'a' || myKeyLeft == 'A' || myKeyLeft == 'ArrowLeft') &&
+      (myKeyUp != 'w' || myKeyUp != 'W' || myKeyUp != 'ArrowUp' || myKeyDown != 's' || myKeyDown != 'S' || myKeyDown != 'ArrowDown')){
+      myKeyLeft = ''
+      clearInterval(myClockLeft)
+      movingLeft = 'false'
+   }
+   if ((myKeyLeft == 'a' || myKeyLeft == 'A' || myKeyLeft == 'ArrowLeft') &&
+      (myKeyUp == 'w' || myKeyUp == 'W' || myKeyUp == 'ArrowUp' || myKeyDown == 's' || myKeyDown == 'S' || myKeyDown == 'ArrowDown')){
+      myKeyUp = ''
+   }
+   if (myKeyRight == 'd' || myKeyRight == 'D' || myKeyRight == 'ArrowRight'){
+      myKeyRight = ''
+      clearInterval(myClockRight)
+      movingRight = 'false'
+   }
+   if (myKeyUp == 'w' || myKeyUp == 'W' || myKeyUp == 'ArrowUp'){
+      myKeyUp = ''
+   }
+   if (myKeyDown == 's' || myKeyDown == 'S' || myKeyDown == 'ArrowDown'){
+      myKeyDown = ''
+   }
+
+}">
+
+
+<script>
+src="https://jeremyckahn.github.io/keydrown/dist/keydrown.js"
+
+   // global variables here
+   let myGlobalX = 0
+   let myGravity = 0
+   let myClock
+   let myClock2 = 0
+   let myClockLeft = 0
+   let myClockRight = 0
+   let myInterval = 0;
+   let backgroundAuto = 'off'
+   let gravityDirection = 'none'
+   let facingDirectionV = 'down'
+   let facingDirectionH = 'right'
+   let movingLeft = 'false'
+   let movingRight = 'false'
+
+   // global functions here
+function myHitOther(my1,my2){
+   left1   = parseInt(document.getElementById(my1).style.left)
+   right1  = left1 + parseInt(document.getElementById(my1).style.width)
+   top1    = parseInt(document.getElementById(my1).style.top)   
+   bottom1 = top1   + parseInt(document.getElementById(my1).style.height)
+   left2   = parseInt(document.getElementById(my2).style.left)
+   right2  = left2 + parseInt(document.getElementById(my2).style.width)
+   top2    = parseInt(document.getElementById(my2).style.top)   
+   bottom2 = top2   + parseInt(document.getElementById(my2).style.height)
+   if ((right1  >=  left2  ) &&      	
+       (bottom1 >=  top2   ) &&
+       (left1   <=  right2 ) &&
+       (top1    <=  bottom2) ){
+       return true
+   }
+}
+
+function myCheckHitLeftWall(){
+   if (myHitOther('myImgChar','myImgLeftWall')){
+      document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + 1 + 'px'
+   }
+}
+function myCheckHitRightWall(){
+   if (myHitOther('myImgChar','myImgRightWall')){
+      document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + -1 + 'px'
+   }
+}
+function myCheckHitFloor(){
+   if ( myHitOther('myImgChar','myImgFloor') ){
+       //document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) - 1 + 'px'
+       myGravity = 0
+  } 
+}
+   function myCheckHitRoof(){
+   if ( myHitOther('myImgChar','myImgRoof') ){
+       //document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + 1 + 'px'
+       myGravity = 0
+   }
+   }
+   function myCheckLeftWall1(){
+      if ( myHitOther('myImgChar','myImgGround01')){
+         document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + 1 + 'px'
+      }
+   }
+   function myCheckRightWall1(){
+      if ( myHitOther('myImgChar','myImgGround01')){
+         document.getElementById('myImgChar').style.left = parseInt(document.getElementById('myImgChar').style.left) + -1 + 'px'
+      }
+   }
+   function myCheckHitFloor1(){
+      if (myHitOther('myImgChar','myImgGround01') && (gravityDirection == 'down')){
+         myGravity = 0
+         document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + -1 + 'px'
+      }
+   }
+   function myCheckHitRoof1(){
+      if (myHitOther('myImgChar','myImgGround01') && (gravityDirection == 'up')){
+         myGravity = 0
+         document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + 1 + 'px'
+      }
+   }
+
+   function startupGravityDown(){
+   clearInterval(myClock2)
+   myClock2 = setInterval(function(){
+      myCheckHitFloor();
+      myCheckHitRoof();
+      myCheckHitFloor1()
+      myCheckHitRoof1()
+      checkSpikes()
+      checkSpikes2()
+      checkWin()
+      myGravity += 0.07
+      document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
+      if (myGravity >= 1){
+         clearInterval(myClock2)
+         myGravity = 1
+         gravity()
+      }
+   }, 2)
+   }
+   function startupGravityUp(){
+   clearInterval(myClock2)
+   myClock2 = setInterval(function(){
+      myCheckHitFloor();
+      myCheckHitRoof();
+      myCheckHitFloor1()
+      myCheckHitRoof1()
+      checkSpikes()
+      checkSpikes2()
+      checkWin()
+      myGravity -= 0.07
+      document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
+      if (myGravity <= -1){
+         clearInterval(myClock2)
+         myGravity = -1
+         gravity()
+      }
+   }, 2)
+   }
+function gravity(){
+   clearInterval(myClock2)
+   myClock2 = setInterval(function(){
+      myCheckHitFloor();
+      myCheckHitRoof();
+      myCheckHitFloor1()
+      myCheckHitRoof1()
+      checkSpikes()
+      checkSpikes2()
+      checkWin()
+      document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
+  }, 2)
+}
+
+function checkGravityDown(){
+   if ((myHitOther('myImgChar','myImgFloor') != true) &&
+      (myHitOther('myImgChar','myImgGround01') != true) &&
+      (gravityDirection == 'down')){
+         startupGravityDown()
+   }
+}
+function checkGravityUp(){
+   if ((myHitOther('myImgChar','myImgRoof') != true) &&
+      (myHitOther('myImgChar','myImgGround01') != true) &&
+      (gravityDirection == 'up')){
+         startupGravityUp()
+   }
+}
+
+function checkFacingDirection(){
+   if ((facingDirectionV == 'down') && (facingDirectionH == 'left')){
+      const scale = document.getElementById('myImgChar')
+      scale.style.transform = 'scale(1, 1)'
+   }
+   if ((facingDirectionV == 'down') && (facingDirectionH == 'right')){
+      const scale = document.getElementById('myImgChar')
+      scale.style.transform = 'scale(-1, 1)'
+   }
+   if ((facingDirectionV == 'up') && (facingDirectionH == 'left')){
+      const scale = document.getElementById('myImgChar')
+      scale.style.transform = 'scale(1, -1)'
+   }
+   if ((facingDirectionV == 'up') && (facingDirectionH == 'right')){
+         const scale = document.getElementById('myImgChar')
+      scale.style.transform = 'scale(-1, -1)'
+   }
+}
+
+function checkWin(){
+   if (myHitOther ('myImgChar','myImgDoor')){
+      location = 'game-level1.html'
+   }
+}
+function gameOver(){
+   location = 'game-tutorial.html'
+}
+function checkSpikes(){
+   if (myHitOther ('myImgChar','myImgSpike01')){
+      gameOver()
+   }
+}
+function checkSpikes2(){
+   if (myHitOther ('myImgChar','myImgSpike02')){
+      gameOver()
+   }
+}
+</script>
+
+
+<img id="myImgChar" style="position:absolute; width:100px; height:100px; top:550px; left:200px;" src="myImage01.jpg">
+<img id="myImgLeftWall" style="position:absolute; width:30px; height:625px; top:50px; left:100px;" src="Ground.jpg">
+<img id="myImgRightWall" style="position:absolute; width:30px; height:625px; top:50px; left:1370px;" src="Ground.jpg">
+<img id="myImgRoof" style="position:absolute; width:1300px; height:30px; top:50px; left:100px;" src="Ground.jpg">
+<img id="myImgFloor" style="position:absolute; width:1300px; height:30px; top:650px; left:100px;" src="Ground.jpg">
+<img id="myImgDoor" style="position:absolute; width:60px; height:100px; top:550px; left:1200px;" src="Door.jpg">
+
+
+<input type=button value="Start/Stop Auto Background" onclick="{
+   if (backgroundAuto == 'off') {
+      backgroundAuto = 'on'
+  clearInterval(myClock)
+  let myTemp = '100px 0px'
+  myClock = setInterval(function(){
+      myGlobalX -= 1
+      myTemp =  myGlobalX + 'px 0px'
+      document.getElementById('myBody').style.backgroundPosition = myTemp
+  }, 10)
+ } else {
+      (backgroundAuto == 'on') 
+      backgroundAuto = 'off'
+      clearInterval(myClock)
+   }
+}"><br><br><br><br><br><br><br><br>
+<h2 align=center style="color:white" id='myLevel'>Level 1</h2>
+
+
+<h1 align=center><input type=button id="myStart" value="Start"onclick="{
+   //const scale = document.getElementById('myImgSpike01')
+      //scale.style.transform = 'scale(1, -1)'
+   gravityDirection = 'down'
+   checkFacingDirection()
+   myGravity = 1
+   gravity()
+   this.style.display='none'
+   document.getElementById('myLevel').style.display='none'
+   }"></h1>
+
