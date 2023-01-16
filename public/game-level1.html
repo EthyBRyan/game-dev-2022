@@ -24,8 +24,8 @@ onkeydown="{
             checkGravityDown()
             checkGravityUp()
             myCheckLeftWall1()
-            checkSpikes()
-            checkSpikes2()
+            //checkSpikes()
+            //checkSpikes2()
             checkWin()
    }, 2)
    }
@@ -45,8 +45,8 @@ onkeydown="{
             checkGravityDown()
             checkGravityUp()
             myCheckRightWall1()
-            checkSpikes()
-            checkSpikes2()
+            //checkSpikes()
+            //checkSpikes2()
             checkWin()
          }, 2)
    }
@@ -192,9 +192,9 @@ function myCheckHitFloor(){
       myCheckHitFloor();
       myCheckHitRoof();
       myCheckHitFloor1()
-      myCheckHitRoof1()
-      checkSpikes()
-      checkSpikes2()
+
+      //checkSpikes()
+      //checkSpikes2()
       checkWin()
       myGravity += 0.07
       document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
@@ -210,10 +210,10 @@ function myCheckHitFloor(){
    myClock2 = setInterval(function(){
       myCheckHitFloor();
       myCheckHitRoof();
-      myCheckHitFloor1()
+
       myCheckHitRoof1()
-      checkSpikes()
-      checkSpikes2()
+      //checkSpikes()
+      //checkSpikes2()
       checkWin()
       myGravity -= 0.07
       document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
@@ -231,8 +231,8 @@ function gravity(){
       myCheckHitRoof();
       myCheckHitFloor1()
       myCheckHitRoof1()
-      checkSpikes()
-      checkSpikes2()
+      //checkSpikes()
+      //checkSpikes2()
       checkWin()
       document.getElementById('myImgChar').style.top = parseInt(document.getElementById('myImgChar').style.top) + myGravity + 'px'
   }, 2)
@@ -280,16 +280,16 @@ function checkWin(){
 function gameOver(){
    location = 'game-tutorial.html'
 }
-function checkSpikes(){
-   if (myHitOther ('myImgChar','myImgSpike01')){
-      gameOver()
-   }
-}
-function checkSpikes2(){
-   if (myHitOther ('myImgChar','myImgSpike02')){
-      gameOver()
-   }
-}
+//function checkSpikes(){
+   //if (myHitOther ('myImgChar','myImgSpike01')){
+      //gameOver()
+   //}
+//}
+//function checkSpikes2(){
+   //if (myHitOther ('myImgChar','myImgSpike02')){
+      //gameOver()
+   //}
+//}
 </script>
 
 
@@ -299,7 +299,7 @@ function checkSpikes2(){
 <img id="myImgRoof" style="position:absolute; width:1300px; height:30px; top:50px; left:100px;" src="Ground.jpg">
 <img id="myImgFloor" style="position:absolute; width:1300px; height:30px; top:650px; left:100px;" src="Ground.jpg">
 <img id="myImgDoor" style="position:absolute; width:60px; height:100px; top:550px; left:1200px;" src="Door.jpg">
-
+<img id="myImgGround01" style="position:absolute; width:60px; height:100px; top:200px; left:600px;" src="Ground.jpg">
 
 <input type=button value="Start/Stop Auto Background" onclick="{
    if (backgroundAuto == 'off') {
