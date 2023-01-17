@@ -1,0 +1,17 @@
+<body id="myBody" style="background-repeat:repeat; background-size: 80%" background="myBackground01.jpg"></body>
+<h1 align=center style="color:white">t2a12-Taxes.html </h1><br>
+
+<span style="color:white">Put in your hourly pay and the hours you worked.</span><br>
+<span style="color:white">Hourly Pay: </span><input id="myMoney" type=number value="0"><span style="color:white"> Hours Worked: </span><input id="myHours" type=number value="0"><br>
+<input value="Calculate Tax" type="button" onclick="{
+    let money = parseFloat(document.getElementById('myMoney').value)
+    let hours = parseFloat(document.getElementById('myHours').value)
+    let totalMoney = money * hours
+    let tax = totalMoney * 0.3
+    let afterTax = totalMoney - tax
+    document.getElementById('myDiv01').innerHTML = 'You made $' + totalMoney + ', but after tax, you take home $' + afterTax + '.'
+    document.getElementById('myDiv01').innerHTML = 'Your take'
+}">
+
+
+<div style="color:white" id="myDiv01" ></div>
