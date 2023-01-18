@@ -1,0 +1,25 @@
+<body id="myBody" style="background-repeat:repeat; background-size: 80%" background="myBackground01.jpg"></body>
+<h2 align="center" style="color:white">t2a09-local-storage</h2>
+
+<body onload="{
+   myStorage = localStorage.getItem('myStoredText')
+   if(myStorage  != null){
+      document.getElementById('myText1').value = myStorage 
+    }
+}">
+
+<body onunload="{
+   localstorage.setItem('myStoredText',document.getElementById('myText1').value)
+}">   
+
+<span style="color:white">Text example:</span> <input id="myText1" type=text size=70 value="" placeholder="Write here to store"><br>
+
+<input type="button" value="Store Text" onClick="{
+   localStorage.setItem('myStoredText', document.getElementById('myText1').value)
+   alert(document.getElementById('myText1').value + ' \nHas been stored')
+   document.getElementById('myText1').value = ''
+}">
+
+<input type="button" value="Retrieve Text" onClick="{
+   document.getElementById('myText1').value = localStorage.getItem('myStoredText')
+}"> 

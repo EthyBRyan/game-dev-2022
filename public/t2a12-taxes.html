@@ -9,8 +9,11 @@
     let totalMoney = money * hours
     let tax = totalMoney * 0.3
     let afterTax = totalMoney - tax
-    document.getElementById('myDiv01').innerHTML = 'You made $' + totalMoney + ', but after tax, you take home $' + afterTax + '.'
-    document.getElementById('myDiv01').innerHTML = 'Your take'
+    let afterMonth = afterTax * 20
+    let afterYear = afterTax * 240
+    document.getElementById('myDiv01').innerHTML = 'You made $' + totalMoney + ', but after tax, you take home $' + afterTax + '.<br>'
+    document.getElementById('myDiv01').innerHTML += 'Your take in a month (20 days) is $' + afterMonth + '.<br>'
+    document.getElementById('myDiv01').innerHTML += 'Your take in a year (240 days) is $' + afterYear + '.'
 }">
 
 
