@@ -1,0 +1,798 @@
+
+<!-- saved from url=(0114)https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs06-javascript.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>
+    
+ // mySpecialVar = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"> \x3C/script>\n\n' 
+
+ mySpecialVar = '' 
+    
+</script>    
+
+
+
+    
+    
+</head><body><h2 align="center"> Quick Reminders About Javascript:</h2>
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Input output. Getting the information from the text box into the div
+</div><br>
+
+<div id="myDiv123Code"> 
+
+<input type="text" id="myTextIn01" value="Stuff written here" size="30">  
+    
+<input id="myButton123" type="button" value="Input / Output" onclick="{
+      document.getElementById(&#39;myDiv123&#39;).innerHTML = document.getElementById(&#39;myTextIn01&#39;).value // note: use value not innerHTML                                                    
+}"><br><br>
+
+</div>
+<div id="myDiv123">...</div><br>
+
+<input id="myUpdate123" type="button" value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById(&#39;myTextarea123&#39;).value.split(&#39;\n&#39;)
+  myFred.pop()
+  myFred.push(&#39;&#39;)
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join(&#39;\n&#39;)
+
+  document.getElementById(&#39;myDiv123Code&#39;).innerHTML =    myJoe 
+  document.getElementById(&#39;myButton123&#39;).click()
+                                             
+}"><br>
+
+<textarea id="myTextarea123" wrap="off" style="font-size:15px; color:white; background-color:black; width:90%;" rows="2" onclick="{
+  if (myOnce123){
+     myTextGrow(&#39;myTextarea123&#39;, &#39;myDiv123Code&#39;)
+     document.getElementById(&#39;myUpdate123&#39;).style.visibility = &#39;visible&#39;
+     myOnce123 = false
+  }
+}">Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Input into a variable and convert the stored value to integers, floating point numbers etc.
+</div><br>
+
+
+<div id="myDiv124Code"> 
+    
+<input type="text" id="myTextIn1" value="3.45" size="30">  + <input type="text" id="myTextIn2" value="6.78" size="30"> 
+
+<input id="myButton124" type="button" value="Add the numbers" onclick="{
+
+   var my1 = document.getElementById(&#39;myTextIn1&#39;).value  
+   var my2 = document.getElementById(&#39;myTextIn2&#39;).value  
+   document.getElementById(&#39;myDiv124&#39;).innerHTML =   &#39;Numbers added as strings &#39; +  my1 + &#39; + &#39; +  my2 + &#39; = &#39; +  (my1 + my2)  + &#39;&lt;br&gt;&#39;   
+   document.getElementById(&#39;myDiv124&#39;).innerHTML +=  &#39;Numbers added as integers &#39; +  my1 + &#39; + &#39; +  my2 + &#39; = &#39; +  (parseInt(my1) + parseInt(my2))  + &#39;&lt;br&gt;&#39;   
+   document.getElementById(&#39;myDiv124&#39;).innerHTML +=  &#39;Numbers added as rounded integers &#39; +  my1 + &#39; + &#39; +  my2 + &#39; = &#39; +  (Math.round(my1) + Math.round(my2))  + &#39;&lt;br&gt;&#39;                                                      
+   document.getElementById(&#39;myDiv124&#39;).innerHTML +=  &#39;Numbers added as floating point (decimal) numbers &#39; +  my1 + &#39; + &#39; +  my2 + &#39; = &#39; +  (parseFloat(my1) + parseFloat(my2))  + &#39;&lt;br&gt;&#39;                                         
+   document.getElementById(&#39;myDiv124&#39;).innerHTML +=  &#39;Numbers added using *1 trick &#39; +  my1 + &#39; + &#39; +  my2 + &#39; = &#39; +  (my1*1 + my2*1)  + &#39;&lt;br&gt;&#39;                                                       
+                                                             
+                                                              
+}"><br><br>
+
+</div>
+<div id="myDiv124">...</div><br>
+
+<input id="myUpdate124" type="button" value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById(&#39;myTextarea124&#39;).value.split(&#39;\n&#39;)
+  myFred.pop()
+  myFred.push(&#39;&#39;)
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join(&#39;\n&#39;)
+
+  document.getElementById(&#39;myDiv124Code&#39;).innerHTML =    myJoe 
+  document.getElementById(&#39;myButton124&#39;).click()
+                                             
+}"><br>
+
+<textarea id="myTextarea124" wrap="off" style="font-size:15px; color:white; background-color:black; width:90%;" rows="2" onclick="{
+  if (myOnce124){
+     myTextGrow(&#39;myTextarea124&#39;, &#39;myDiv124Code&#39;)
+     document.getElementById(&#39;myUpdate124&#39;).style.visibility = &#39;visible&#39;
+     myOnce124 = false
+  }
+}">Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+For loops, making computers do things over and  over and  over and  over and  over and  over and again
+</div><br>
+
+
+<div id="myDiv125Code"> 
+
+Loop this many times <input type="number" id="myTextLoop" value="10" size="10"> 
+    
+<input id="myButton125" type="button" value="For Loop" onclick="{
+                                                               
+    document.getElementById(&#39;myDiv125&#39;).innerHTML = &#39;&#39;   // blank out the DIV  
+                                                               
+    for (myLoop = 0;  myLoop &lt;= document.getElementById(&#39;myTextLoop&#39;).value;    myLoop++){   
+                                                               
+       document.getElementById(&#39;myDiv125&#39;).innerHTML += &#39;Loop #&#39;+ myLoop+&#39;&lt;br&gt;&#39;  
+                                                               
+    }
+                                                               
+}"><br><br>
+
+</div>
+<div id="myDiv125">...</div><br>
+
+<input id="myUpdate125" type="button" value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById(&#39;myTextarea125&#39;).value.split(&#39;\n&#39;)
+  myFred.pop()
+  myFred.push(&#39;&#39;)
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join(&#39;\n&#39;)
+
+  document.getElementById(&#39;myDiv125Code&#39;).innerHTML =    myJoe 
+  document.getElementById(&#39;myButton125&#39;).click()
+                                             
+}"><br>
+
+<textarea id="myTextarea125" wrap="off" style="font-size:15px; color:white; background-color:black; width:90%;" rows="2" onclick="{
+  if (myOnce125){
+     myTextGrow(&#39;myTextarea125&#39;, &#39;myDiv125Code&#39;)
+     document.getElementById(&#39;myUpdate125&#39;).style.visibility = &#39;visible&#39;
+     myOnce125 = false
+  }
+}">Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+"if statements" make decisions.<br>
+    if (x==4){ print something }<br>
+    
+    Note: The last complex if statement may not correctly show the &amp;&amp; = AND<br>
+    || = OR
+    !=   NOT EQUAL
+</div><br>
+
+
+<div id="myDiv126Code"> 
+
+Change the number <input type="number" id="myTextIf" value="4" size="10">     
+    
+<input id="myButton126" type="button" value="If Statements" onclick="{
+      
+   document.getElementById(&#39;myDiv126&#39;).innerHTML = &#39;&#39; // Clear the DIV
+                                                                    
+   myIf =   document.getElementById(&#39;myTextIf&#39;).value   // Store the number
+     
+   if (myIf == 4){                                                                
+      document.getElementById(&#39;myDiv126&#39;).innerHTML += &#39;That number equals 4 &lt;br&gt;&#39;
+   }   
+                                                                    
+   if (myIf &lt;= 4){                                                                
+      document.getElementById(&#39;myDiv126&#39;).innerHTML += &#39;That number is less than 4 &lt;br&gt;&#39;
+   }  
+                                                                            
+   if (Math.abs(myIf) == 4){        // absolute value of -4 = 4                                                         
+      document.getElementById(&#39;myDiv126&#39;).innerHTML += &#39;That number is either positive or negative 4&lt;br&gt;&#39;
+   }  
+                                                                        
+   if (myIf &lt; 0){                                                                
+      document.getElementById(&#39;myDiv126&#39;).innerHTML += &#39;That number is a negative number&lt;br&gt;&#39;
+   }  
+                                                                    
+   if (myIf == 4){                                                                
+      document.getElementById(&#39;myDiv126&#39;).innerHTML += &#39;That number is less than or equal to 4 &lt;br&gt;&#39;
+   }   
+                                                                    
+   if (myIf &gt;= 4){                                                                
+      document.getElementById(&#39;myDiv126&#39;).innerHTML += &#39;That number is greater than or equal to 4 &lt;br&gt;&#39;
+   }   
+                                                                    
+   if (myIf != 4){                                                                
+      document.getElementById(&#39;myDiv126&#39;).innerHTML += &#39;That number does not equal 4 &lt;br&gt;&#39;
+   }   
+                                                                    
+   if ((myIf == 4) || (myIf == 8)) {                                                                
+      document.getElementById(&#39;myDiv126&#39;).innerHTML += &#39;That number equals either 4 or 8 &lt;br&gt;&#39;
+   }     
+                                                                       
+                                                                    
+   if ((myIf == 4) &amp;&amp; (myIf &lt; 8)) {                                                                
+      document.getElementById(&#39;myDiv126&#39;).innerHTML += &#39;That number equals 4 and is less than 8 &lt;br&gt;&#39;
+   }     
+                                                                       
+
+                                                                    
+                                                                   
+}"><br><br>
+
+</div>
+<div id="myDiv126">...</div><br>
+
+<input id="myUpdate126" type="button" value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById(&#39;myTextarea126&#39;).value.split(&#39;\n&#39;)
+  myFred.pop()
+  myFred.push(&#39;&#39;)
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join(&#39;\n&#39;)
+
+  document.getElementById(&#39;myDiv126Code&#39;).innerHTML =    myJoe 
+  document.getElementById(&#39;myButton126&#39;).click()
+                                             
+}"><br>
+
+<textarea id="myTextarea126" wrap="off" style="font-size:15px; color:white; background-color:black; width:90%;" rows="2" onclick="{
+  if (myOnce126){
+     myTextGrow(&#39;myTextarea126&#39;, &#39;myDiv126Code&#39;)
+     document.getElementById(&#39;myUpdate126&#39;).style.visibility = &#39;visible&#39;
+     myOnce126 = false
+  }
+}">Click here to see the working HTML code.
+</textarea><br>
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Arrays store lots of variables with an index number 
+</div><br>
+
+
+<div id="myDiv127Code"> 
+
+
+Store these numbers in an array <input type="text" id="myTextArray" value="3, 7, 9" size="10">        
+    
+<input id="myButton127" type="button" value="Store and show array" onclick="{
+                                                              
+      myArray = []
+      document.getElementById(&#39;myDiv127&#39;).innerHTML = &#39;&#39; // clear the DIV
+                                                              
+      myArray = document.getElementById(&#39;myTextArray&#39;).value.split(&#39;,&#39;)   //splits a string into an array  
+                                                              
+      for (myIndex in myArray){                                                                                                                  
+         document.getElementById(&#39;myDiv127&#39;).innerHTML +=     myIndex + &#39; stores : &#39; + myArray[myIndex] + &#39;&lt;br&gt;&#39;
+      }                                                        
+}"><br><br>
+
+</div>
+<div id="myDiv127">...</div><br>
+
+<input id="myUpdate127" type="button" value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById(&#39;myTextarea127&#39;).value.split(&#39;\n&#39;)
+  myFred.pop()
+  myFred.push(&#39;&#39;)
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join(&#39;\n&#39;)
+
+  document.getElementById(&#39;myDiv127Code&#39;).innerHTML =    myJoe 
+  document.getElementById(&#39;myButton127&#39;).click()
+                                             
+}"><br>
+
+<textarea id="myTextarea127" wrap="off" style="font-size:15px; color:white; background-color:black; width:90%;" rows="2" onclick="{
+  if (myOnce127){
+     myTextGrow(&#39;myTextarea127&#39;, &#39;myDiv127Code&#39;)
+     document.getElementById(&#39;myUpdate127&#39;).style.visibility = &#39;visible&#39;
+     myOnce127 = false
+  }
+}">Click here to see the working HTML code.
+</textarea><br>
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Objects store variables with a named index. Try changing them
+</div><br>
+
+
+<div id="myDiv128Code"> 
+    
+    
+Store these Items in a Javascript object <br>
+    <textarea id="myTextAreaObject" rows="8" cols="70" wrap="false">{
+   "firstName": "John",
+   "lastName": "Doe",
+   "age": 50,
+   "eyeColor": "blue"
+}
+    </textarea><br> 
+    
+<input id="myButton128" type="button" value="Store as an object" onclick="{
+      
+    var myPerson = {}                                                              
+    myPerson = JSON.parse(document.getElementById(&#39;myTextAreaObject&#39;).value)   
+                                                                         
+    document.getElementById(&#39;myDiv128&#39;).innerHTML = &#39;Name: &#39; + myPerson.firstName + &#39; &#39;+ myPerson.lastName + &#39;, Age: &#39;  + myPerson.age  + &#39;, EyeColor: &#39; + myPerson.eyeColor + &#39;&lt;br&gt;&#39;
+                                                       
+                                                              
+}"><br><br>
+
+</div>
+<div id="myDiv128">...</div><br>
+
+<input id="myUpdate128" type="button" value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById(&#39;myTextarea128&#39;).value.split(&#39;\n&#39;)
+  myFred.pop()
+  myFred.push(&#39;&#39;)
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join(&#39;\n&#39;)
+
+  document.getElementById(&#39;myDiv128Code&#39;).innerHTML =    myJoe 
+  document.getElementById(&#39;myButton128&#39;).click()
+                                             
+}"><br>
+
+<textarea id="myTextarea128" wrap="off" style="font-size:15px; color:white; background-color:black; width:90%;" rows="2" onclick="{
+  if (myOnce128){
+     myTextGrow(&#39;myTextarea128&#39;, &#39;myDiv128Code&#39;)
+     document.getElementById(&#39;myUpdate128&#39;).style.visibility = &#39;visible&#39;
+     myOnce128 = false
+  }
+}">Click here to see the working HTML code.
+</textarea><br>
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Functions are the main way to make repeatable code
+</div><br>
+
+
+<div id="myDiv129Code"> 
+
+<input id="myButton129" type="button" value="Make and use a function" onclick="{
+
+function myFun(myVar){
+  document.getElementById(&#39;myDiv129&#39;).innerHTML = &#39;The function made this line. &#39; + myVar + &#39; was passed to the function &lt;br&gt;&#39;                                                                     
+}                                                                     
+                                                                      
+
+myFun(&#39;28&#39;)      // This activates the function                                                                
+                                                                      
+}"><br><br>
+
+</div>
+<div id="myDiv129">...</div><br>
+
+<input id="myUpdate129" type="button" value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById(&#39;myTextarea129&#39;).value.split(&#39;\n&#39;)
+  myFred.pop()
+  myFred.push(&#39;&#39;)
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join(&#39;\n&#39;)
+
+  document.getElementById(&#39;myDiv129Code&#39;).innerHTML =    myJoe 
+  document.getElementById(&#39;myButton129&#39;).click()
+                                             
+}"><br>
+
+<textarea id="myTextarea129" wrap="off" style="font-size:15px; color:white; background-color:black; width:90%;" rows="2" onclick="{
+  if (myOnce129){
+     myTextGrow(&#39;myTextarea129&#39;, &#39;myDiv129Code&#39;)
+     document.getElementById(&#39;myUpdate129&#39;).style.visibility = &#39;visible&#39;
+     myOnce129 = false
+  }
+}">Click here to see the working HTML code.
+</textarea><br>
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Classes are everything put together.<br>
+Functions inside a class are called "methods"<br>
+Variables inside a class are called "properties"<br>
+If statements, for loops, arrays, objects are all allowed inside a class<br>
+Classes can be extended, so you can add your own functionality to them<br>
+</div><br>
+
+
+<div id="myDiv130Code"> 
+
+<input id="myButton130" type="button" value="Make and Show the class myAnimal" onclick="{
+                                                                                 
+ class myAnimal {
+    constructor(passName, passAge) {
+       this.myName = passName;
+       this.myAge = passAge;
+    }
+
+    myShow(){
+       document.getElementById(&#39;myDiv130&#39;).innerHTML = &#39;Hello &#39;+ this.myName + &#39;. You are &#39; + this.myAge + &#39; years old&lt;br&gt;&#39;
+    }
+
+ }  // end class myAnimal
+                                                             
+   
+                                                                                 
+   myDog = new myAnimal(&#39;Snickers&#39;, 5)
+   myDog.myShow()                                                       
+}"><br><br>
+
+</div>
+<div id="myDiv130">...</div><br>
+
+<input id="myUpdate130" type="button" value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById(&#39;myTextarea130&#39;).value.split(&#39;\n&#39;)
+  myFred.pop()
+  myFred.push(&#39;&#39;)
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join(&#39;\n&#39;)
+
+  document.getElementById(&#39;myDiv130Code&#39;).innerHTML =    myJoe 
+  document.getElementById(&#39;myButton130&#39;).click()
+                                             
+}"><br>
+
+<textarea id="myTextarea130" wrap="off" style="font-size:15px; color:white; background-color:black; width:90%;" rows="2" onclick="{
+  if (myOnce130){
+     myTextGrow(&#39;myTextarea130&#39;, &#39;myDiv130Code&#39;)
+     document.getElementById(&#39;myUpdate130&#39;).style.visibility = &#39;visible&#39;
+     myOnce130 = false
+  }
+}">Click here to see the working HTML code.
+</textarea><br>
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Here we extend the class myAnimal to myCat
+</div><br>
+
+
+<div id="myDiv131Code"> 
+
+<input id="myButton131" type="button" value="Extend a class" onclick="{
+class myAnimal {
+    constructor(passName, passAge) {
+       this.myName = passName;
+       this.myAge = passAge;
+    }
+    myShow(){
+       document.getElementById(&#39;myDiv131&#39;).innerHTML = &#39;Hello &#39;+ this.myName + &#39;. You are &#39; + this.myAge + &#39; years old&lt;br&gt;&#39;
+    }
+ }  // end class myAnimal
+                                                             
+class myCat extends myAnimal {                                                                      
+     myShow(){
+       document.getElementById(&#39;myDiv131&#39;).innerHTML = this.myName + &#39; is a great cat who is &#39; + this.myAge + &#39; years old&lt;br&gt;&#39;
+    }                                                                   
+}    // end extended class myCat
+                                                                     
+                                                              
+                                                                                                                                                                                                       
+   myPet = new myCat(&#39;Fluffy&#39;, 14)
+   myPet.myShow()                                                                           
+}"><br><br>
+
+</div>
+<div id="myDiv131">...</div><br>
+
+<input id="myUpdate131" type="button" value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById(&#39;myTextarea131&#39;).value.split(&#39;\n&#39;)
+  myFred.pop()
+  myFred.push(&#39;&#39;)
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join(&#39;\n&#39;)
+
+  document.getElementById(&#39;myDiv131Code&#39;).innerHTML =    myJoe 
+  document.getElementById(&#39;myButton131&#39;).click()
+                                             
+}"><br>
+
+<textarea id="myTextarea131" wrap="off" style="font-size:15px; color:white; background-color:black; width:90%;" rows="2" onclick="{
+  if (myOnce131){
+     myTextGrow(&#39;myTextarea131&#39;, &#39;myDiv131Code&#39;)
+     document.getElementById(&#39;myUpdate131&#39;).style.visibility = &#39;visible&#39;
+     myOnce131 = false
+  }
+}">Click here to see the working HTML code.
+</textarea><br>
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com/">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+
+myOnce123 = true    // so textareas are only clicked once
+myOnce124 = true  
+myOnce125 = true  
+
+myOnce126 = true   
+
+myOnce127 = true
+myOnce128 = true  
+myOnce129 = true  
+myOnce130 = true  
+myOnce131 = true  
+myOnce132 = true  
+myOnce133 = true  
+myOnce134 = true  
+myOnce135 = true  
+myOnce136 = true  
+myOnce137 = true  
+myOnce138 = true  
+myOnce139 = true  
+myOnce140 = true  
+myOnce141 = true  
+myOnce142 = true  
+myOnce143 = true  
+myOnce144 = true  
+myOnce145 = true  
+myOnce146 = true  
+myOnce147 = true  
+myOnce148 = true  
+myOnce149 = true  
+myOnce150 = true  
+myOnce151 = true  
+myOnce152 = true  
+myOnce153 = true      
+myOnce154 = true      
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = mySpecialVar  + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+
+}  
+
+
+</script>  
+ 
+ 
+
+</body></html>

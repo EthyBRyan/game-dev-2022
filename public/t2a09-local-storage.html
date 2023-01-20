@@ -12,12 +12,22 @@
    localstorage.setItem('myStoredText',document.getElementById('myText1').value)
 }">   
 
-<span style="color:white">Text example:</span> <input id="myText1" type=text size=70 value="" placeholder="Write here to store"><br>
+<script>
+   let textTime = 0
+   function textDisappear(){
+      document.getElementById('storedText').innerHTML = ' Text has been stored.'
+      clearTimeout(textTime)
+      textTime = setTimeout(function(){
+         document.getElementById('storedText').innerHTML = ''
+      }, 2000)
+   }
+</script>
+<input id="myText1" type=text size=70 value="" placeholder="Write here to store and retrieve"><span id="storedText" style="color:white"></span><br>
 
 <input type="button" value="Store Text" onClick="{
    localStorage.setItem('myStoredText', document.getElementById('myText1').value)
-   alert(document.getElementById('myText1').value + ' \nHas been stored')
    document.getElementById('myText1').value = ''
+   textDisappear()
 }">
 
 <input type="button" value="Retrieve Text" onClick="{
